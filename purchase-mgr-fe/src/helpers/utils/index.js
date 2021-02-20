@@ -61,3 +61,14 @@ export const formatTimestamp = (ts) => {
 
   return `${YYYY}/${MM}/${DD} ${hh}:${mm}:${ss}`;
 };
+
+// 格式化时间戳 -> YYYY/MM/DD
+export const formatTimestamp2 = (ts) => {
+  const date = new Date(Number(ts));
+
+  const YYYY = date.getFullYear();
+  const MM = timestampPadStart(date.getMonth() + 1);
+  const DD = timestampPadStart(date.getDate());
+
+  return `${YYYY}/${MM}/${DD}`;
+};

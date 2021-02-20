@@ -1,10 +1,10 @@
 <template>
   <div class="layout-basic">
     <div class="header">
-      <div class="h-left">
+      <a href="javascript:;" class="h-left" title="返回首页" @click="goHome">
         <img src="@/assets/img/logo.png" alt="">
         <div class="l-info">采购管理系统</div>
-      </div>
+      </a>
       <div class="h-right">
         <div class="hello-msg">
           {{ `xxx,欢迎！` }}

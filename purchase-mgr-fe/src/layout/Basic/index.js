@@ -24,10 +24,15 @@ export default defineComponent({
       });
     }
 
+    const goHome = () => {
+      window.location.href = '/';
+    }
+
 
     return {
       // store,
-      logout
+      logout,
+      goHome
     }
   }
 });

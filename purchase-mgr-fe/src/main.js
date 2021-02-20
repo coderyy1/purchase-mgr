@@ -15,6 +15,9 @@ import './assets/jquery-1.12.2'
 
 import './assets/Bootstrap/css/bootstrap.min.css'
 
+
+
+
 const app = createApp(App);
 
 regDirectives(app);

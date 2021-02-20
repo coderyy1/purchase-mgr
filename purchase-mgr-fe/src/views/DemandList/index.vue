@@ -30,7 +30,6 @@
                 placeholder="根据需求货物搜索"
                 v-model:value="keyword"
                 enter-button
-                allowClear
                 @search="search"
               />
               <a href="javascript:;"
@@ -43,7 +42,7 @@
             <!-- 添加需求按钮  -->
             <div>
               <a-button @click="showAdd = true" >
-                添加采购需求
+                发布采购需求
               </a-button>
             </div>
           </space-between>
@@ -68,25 +67,40 @@
           </template>
           <!-- 截止日期 -->
           <template #endTime="data">
-            {{ formatTimestamp(data.text.endTime) }}
+            {{ formatTimestamp2(data.text.endTime) }}
           </template>
           <!-- 操作 -->
           <template #actions="data" v-if="!simple">
             <space-between>
               <a href="javascript:;" 
-                class="btn btn-info btn-sm">
+                class="btn btn-info btn-sm"
+                @click="goToDetail(data.text)"
+              >
                 详情
               </a>
               <a href="javascript:;" 
-                class="btn btn-success btn-sm">
+                class="btn btn-success btn-sm"
+                v-if="data.text.state === 1"
+              >
                 完成订单
               </a>
+              <button
+                class="btn btn-success btn-sm"
+                disabled="disabled"
+                v-else
+              >
+                订单已完成
+              </button>
               <a href="javascript:;" 
-                class="btn btn-warning btn-sm">
+                class="btn btn-warning btn-sm"
+                @click="updateDemand(data.text)"
+              >
                 修改
               </a>
               <a href="javascript:;"
-                class="btn btn-danger btn-sm">
+                class="btn btn-danger btn-sm"
+                @click="removeDemand(data.text)"
+              >
                 删除
               </a>
             </space-between>
@@ -112,12 +126,11 @@
     />
 
     <!-- 修改的modal -->
-    <!-- <update 
+    <update 
       v-model:isShow="showUpdate" 
-      :info="currentBookInof"
+      :info="currentDemandInfo"
       @updateList="updateList"
-      :classify="classifyList"
-    /> -->
+    />
   </div>
 </template>
 

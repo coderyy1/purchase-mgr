@@ -88,4 +88,108 @@ router.get('/list', async (ctx) => {
 });
 
 
+//删除需求的接口--------------------------------------------------
+router.delete('/deleteDemand/:id', async (ctx) => {
+  const {
+    id
+  } = ctx.params;
+
+  const one = await Demand.findOne({
+    _id: id
+  }).exec();
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '出错了',
+      data: null
+    };
+
+    return;
+  }
+
+  const res = await Demand.deleteOne({
+    _id: id
+  });
+
+  ctx.body = {
+    code: 1,
+    msg: '需求删除成功',
+    data: res
+  }
+});
+
+
+//修改需求的接口-------------------------------------------------------------
+router.post('/update', async (ctx) => {
+  const {
+    id,
+    ...others
+  } = ctx.request.body;
+
+  const one = await Demand.findOne({
+    _id: id
+  }).exec();
+
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '出错了',
+      data: null
+    };
+
+    return;
+  }
+
+  // 利用对象合并 + es6的rest语法完成修改
+  const newObj = {};
+  // entries => 创建可迭代对象
+  Object.entries(others).forEach(([key, value]) => {
+    if(value) {
+      newObj[key] = value;
+
+    }
+  });
+
+  Object.assign(one, newObj);
+
+  const res = await one.save();
+
+  ctx.body = {
+    code: 1,
+    msg: '修改成功',
+    data: res
+  };
+
+});
+
+// 需求详情页面接口---------------------------------------------------------------------------------------
+
+router.get('/detail/:id', async (ctx) => {
+  const {
+    id
+  } = ctx.params;
+
+  const one = await Demand.findOne({
+    _id: id
+  }).exec();
+
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '出错了',
+      data: null
+    }
+
+    return;
+  }
+
+  ctx.body = {
+    code: 1,
+    msg: '成功找到需求信息',
+    data: one
+  };
+
+});
+
+
 module.exports = router;

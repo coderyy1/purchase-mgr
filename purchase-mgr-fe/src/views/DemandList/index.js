@@ -1,9 +1,9 @@
 import { defineComponent, ref, onMounted } from 'vue';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import Add from './Add/index.vue';
-// import Update from './Update/index.vue';
+import Update from './Update/index.vue';
 import { demand } from '@/network';
-import { result, formatTimestamp } from '@/helpers/utils';
+import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 // import { useStore } from 'vuex';
 
@@ -14,7 +14,7 @@ export default defineComponent({
     simple: Boolean
   },
   components: {
-    Add
+    Add, Update
   },
   setup(props) {
     const column = [
@@ -72,7 +72,7 @@ export default defineComponent({
     const showUpdate = ref(false);
 
     // 要传给修改modal中的数据
-    const currentDemandInof = ref({});
+    const currentDemandInfo = ref({});
 
     // 搜索
     const keyword = ref('');
@@ -80,7 +80,7 @@ export default defineComponent({
     // 显示返回
     const showBack = ref(false);
 
-    // const router = useRouter();
+    const router = useRouter();
 
     const loading = ref(true);
 
@@ -136,28 +136,21 @@ export default defineComponent({
       showBack.value = false;
     }
 
-    // 删除的底层方法
-    const remove = async (item) => {
-
-      // const { _id } = item;
-      // const res = await book.deleteBook(_id);
-      // result(res)
-      //   .success((data) => {
-      //     message.success(data.msg);
-
-      //     getList();
-      //   })
-    }
-
-    // 删除按钮方法
+    // 删除方法
     const removeDemand = (item) => {
       Modal.confirm({
         title: '确认删除该采购需求吗？',
         okText: '确认',
         cancelText: '取消',
         onCancel() {},
-        onOk(){
-          remove(item);
+        onOk: async () => {
+          const { _id } = item;
+          const res = await demand.deleteDemand(_id);
+          result(res)
+            .success((data) => {
+              message.success(data.msg);
+              getList();
+            })
         }
       })
     }
@@ -167,12 +160,17 @@ export default defineComponent({
     // 修改的方法
     const updateDemand = (data) => {
       showUpdate.value = true;
-      currentDemandInof.value = data;
+      currentDemandInfo.value = data;
     }
 
+    //完成订单的方法
+
+
     // 跳转详情页面
-    const gotoDetail = (data) => {
-      
+    const goToDetail = (data) => {
+      router.push({
+        path: `/demands/${data._id}`
+      });
     }
 
     return {
@@ -181,11 +179,12 @@ export default defineComponent({
       list,
       keyword,
       formatTimestamp,
+      formatTimestamp2,
       showBack,
       currentPage,
       total,
       showUpdate,
-      currentDemandInof,
+      currentDemandInfo,
       loading,
       simple: props.simple,
 
@@ -197,7 +196,7 @@ export default defineComponent({
       back,
       removeDemand,
       updateDemand,
-      gotoDetail
+      goToDetail
     }
   }
 });
