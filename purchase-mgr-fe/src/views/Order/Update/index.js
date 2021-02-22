@@ -1,5 +1,5 @@
 import { defineComponent, reactive, watch, ref } from 'vue';
-import { demand } from '@/network/index';
+import { order } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
 import moment from 'moment';
@@ -13,17 +13,12 @@ export default defineComponent({
   setup(props, context) {
     const updateForm = reactive({
       name: '',
-      num: 0,
-      endTime: '',
-      state: 1
+      supplier: '',
+      money: 0
     });
-
-    const finishNum = ref(0);
 
     watch(() => props.info, (current) => {
       Object.assign(updateForm, current);
-      updateForm.endTime = moment(Number(updateForm.endTime));
-      finishNum.value = props.info.finishNum;
     });
 
     const submit = async () => {
@@ -34,34 +29,25 @@ export default defineComponent({
 
         return;
       }
-      if(updateForm.num === '') {
-        message.info('请输入需求数量');
+      if(updateForm.supplier === '') {
+        message.info('请输入供应商');
 
         return;
       }
-      if(updateForm.endTime === '') {
-        message.info('请选择截止日期');
-
-        return;
-      }
-      if(updateForm.state === '') {
-        message.info('请选择状态');
+      if(updateForm.money === '') {
+        message.info('请输入金额');
 
         return;
       }
 
       const form = {
         id: updateForm._id,
-        name: updateForm.name,
-        num: updateForm.num,
-        endTime: updateForm.endTime,
-        state: updateForm.state,
-        finishNum: updateForm.state === 1 ? finishNum.value : updateForm.num
+        supplier: updateForm.supplier,
+        money: updateForm.money
       };
-      form.endTime = updateForm.endTime.valueOf();
 
       // 发送请求
-      const res = await demand.update(form);
+      const res = await order.update(form);
 
       // 处理结果
       result(res)

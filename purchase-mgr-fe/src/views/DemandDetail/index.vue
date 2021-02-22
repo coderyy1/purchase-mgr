@@ -37,6 +37,11 @@
               <div class="title">发布者</div>
               <div class="content">{{ d.publisher }}</div>
             </div>
+            <div class="item-col">
+              <div class="title">已完成数量</div>
+              <div class="content">{{ d.finishNum }}</div>
+            </div>
+            <div class="item-col"></div>
           </div>
           <div class="item-row">
             <div class="item-col">
@@ -50,17 +55,45 @@
               <div class="content">{{ formatTimestamp2(d.endTime) }}</div>
             </div>
           </div>
-          <div class="item-row">
-            <div class="item-col">
-              <div class="title">对应订单信息</div>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <div class="content">asdadadad</div>
-            </div>
-          </div>
         </div>
         <a-button class="back" @click="back">
           返回需求列表
         </a-button>
+      </a-card>
+    </a-spin>
+
+    <a-spin :spinning="bottomLoading">
+      <a-card class="hover-card wrapper log">
+        <a-table 
+          rowKey="_id" 
+          :columns="column" 
+          :data-source="list" 
+          bordered
+          :pagination="false"
+          :scroll="{ x: 'max-content' }"
+        >
+          <template #time="data">
+            {{ formatTimestamp(data.text.meta.createdAt) }}
+          </template>
+          <template #actions="data">
+            <a href="javascript:;" 
+                class="btn btn-info btn-sm"
+                @click="goOrderDetail(data.text)"
+            >
+                详情
+            </a>
+          </template>
+        </a-table>
+        <!-- 分页组件 -->
+        <space-between class="pagi">
+          <div></div>
+          <a-pagination 
+            v-model:current="currentPage"
+            :total="total"
+            :page-size="4"
+            @change="setPage"
+          />
+        </space-between>
       </a-card>
     </a-spin>
     <!-- 修改的modal -->

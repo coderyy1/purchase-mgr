@@ -2,28 +2,14 @@
   <div class="wrapper">
     <a-spin :spinning="false">
       <a-card 
-        :title="simple ? '最近添加的采购需求' : ''"
+        :title="simple ? '最近添加的订单' : ''"
       >
         <div v-if="!simple">
           <!-- 标题 -->
-          <h2 class="title">采购需求列表</h2>
+          <h2 class="title">订单列表</h2>
           <a-divider />
           <!-- 搜索框 -->
           <space-between>
-            <!-- 下拉选择 -->
-            <!-- <a-select
-              v-model:value="value1"
-              style="width: 60px"
-              ref="select"
-            >
-              <a-select-option value="jack">
-                Jack
-              </a-select-option>
-              <a-select-option value="111">
-                111
-              </a-select-option>
-            </a-select>
-            {{value1}} -->
             <div class="search-wrapper">
               <a-input-search
                 class="search"
@@ -39,12 +25,7 @@
                 返回
               </a>
             </div>
-            <!-- 添加需求按钮  -->
-            <div>
-              <a-button @click="showAdd = true" >
-                发布采购需求
-              </a-button>
-            </div>
+            <div></div>
           </space-between>
           <a-divider />
         </div>
@@ -57,17 +38,9 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
-          <!-- 状态 -->
-          <template #state="data">
-            {{ data.text.state === 1 ? '未完成' : '已完成' }}
-          </template>
-          <!-- 发布日期 -->
-          <template #startTime="data">
+          <!-- 添加时间 -->
+          <template #time="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}
-          </template>
-          <!-- 截止日期 -->
-          <template #endTime="data">
-            {{ formatTimestamp2(data.text.endTime) }}
           </template>
           <!-- 操作 -->
           <template #actions="data" v-if="!simple">
@@ -79,28 +52,14 @@
                 详情
               </a>
               <a href="javascript:;" 
-                class="btn btn-success btn-sm"
-                v-if="data.text.state === 1"
-                @click="finishDemand(data.text)"
-              >
-                提交订单
-              </a>
-              <button
-                class="btn btn-success btn-sm"
-                disabled="disabled"
-                v-else
-              >
-                订单已完成
-              </button>
-              <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
-                @click="updateDemand(data.text)"
+                @click="updateOrder(data.text)"
               >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
-                @click="removeDemand(data.text)"
+                @click="removeOrder(data.text)"
               >
                 删除
               </a>
@@ -119,19 +78,6 @@
         </space-between>
       </a-card>
     </a-spin>
-
-    <!-- 添加的modal -->
-    <add 
-      v-model:isShow="showAdd"
-      @updateList="updateList"
-    />
-
-    <!-- 完成订单的modal -->
-    <finish
-      v-model:isShow="showFinish"
-      @updateList="updateList"
-      :info="currentDemandInfo"
-    />
 
     <!-- 修改的modal -->
     <update 

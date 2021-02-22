@@ -13,9 +13,11 @@ router.post('/add', async (ctx) => {
   const {
     name,
     num,
+    finishNum = 0,
     endTime,
     publisher = '',
-    state = 1
+    state = 1,
+    order = ''
   } = ctx.request.body;
 
   // 校验
@@ -34,9 +36,11 @@ router.post('/add', async (ctx) => {
   const demand = new Demand({
     name,
     num,
+    finishNum,
     endTime,
     publisher,
-    state
+    state,
+    order
   });
 
   const res = await demand.save();
@@ -152,6 +156,11 @@ router.post('/update', async (ctx) => {
 
   Object.assign(one, newObj);
 
+  if(one.finishNum < one.num) {
+    one.state = 1;
+  }else {
+    one.state = 2;
+  }
   const res = await one.save();
 
   ctx.body = {
