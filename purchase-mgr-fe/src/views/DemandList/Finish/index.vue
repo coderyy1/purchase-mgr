@@ -11,7 +11,11 @@
     >
       <a-form :label-col="{span: 6}">
         <a-form-item label="货物名称">
-          <a-input v-model:value="addForm.name" allowClear/>
+          <a-input 
+            v-model:value="addForm.name" 
+            allowClear
+            disabled
+          />
         </a-form-item>
         <a-form-item label="数量">
           <a-input-number v-model:value="addForm.num" id="inputNumber1" :min="0" :max="maxCount" />
