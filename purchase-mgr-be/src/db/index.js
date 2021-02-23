@@ -2,6 +2,7 @@ require('./Schemas/User');
 require('./Schemas/InviteCode');
 require('./Schemas/Demand');
 require('./Schemas/Order');
+require('./Schemas/Supplier');
 const mongoose = require('mongoose');
 
 // 修复mongoose弃用警告

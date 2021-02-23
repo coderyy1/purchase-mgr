@@ -1,0 +1,39 @@
+.info {
+
+  .item-row {
+    display: flex;
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-col {
+      display: flex;
+      flex: 1;
+      .title {
+        font-weight: 700;
+        min-width: 80px;
+      }
+  
+      .content {
+        color: #666;
+      }
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  .back {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+  
+}
+.log {
+  margin-top: 25px;
+  .pagi {
+    margin-top: 12px; 
+  }
+}

@@ -41,6 +41,20 @@ const routes = [
         path: '/orders/:id',
         name: 'OrderDetail',
         component: () => import(/* webpackChunkName: "OrderDetail" */'../views/OrderDetail/index.vue')
+      },
+
+      // 供应商列表界面
+      {
+        path: '/suppliers',
+        name: 'SupplierList',
+        component: () => import(/* webpackChunkName: "SupplierList" */'../views/SupplierList/index.vue')
+      },
+
+      // 供应商详情界面
+      {
+        path: '/suppliers/:id',
+        name: 'SupplierDetail',
+        component: () => import(/* webpackChunkName: "SupplierDetail" */'../views/SupplierDetail/index.vue')
       }
     ]
   }

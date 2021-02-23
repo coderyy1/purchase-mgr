@@ -1,7 +1,8 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import Add from './Add/index.vue';
 import Update from './Update/index.vue';
-import { demand, order } from '@/network';
+import { supplier } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 // import { useStore } from 'vuex';
@@ -13,31 +14,21 @@ export default defineComponent({
     simple: Boolean
   },
   components: {
-    Update
+    Add, Update
   },
   setup(props) {
     const column = [
       {
-        title: '货物名',
+        title: '名称',
         dataIndex: 'name',
       },
       {
-        title: '数量',
-        dataIndex: 'num',
+        title: '联系方式',
+        dataIndex: 'tel',
       },
       {
-        title: '供应商',
-        dataIndex: 'supplier',
-      },
-      {
-        title: '操作者',
-        dataIndex: 'user',
-      },
-      {
-        title: '添加时间',
-        slots: {
-          customRender: 'time'
-        }
+        title: '联系人',
+        dataIndex: 'contacts',
       },
       {
         title: '操作',
@@ -49,7 +40,7 @@ export default defineComponent({
     ];
 
 
-    // 订单list信息
+    // 供应商list信息
     const list = ref([]);
 
     const total = ref(0);
@@ -60,10 +51,11 @@ export default defineComponent({
     const currentPage = ref(1);
 
     // 控制modal显示
+    const showAdd = ref(false);
     const showUpdate = ref(false);
 
     // 要传给修改modal中的数据
-    const currentDemandInfo = ref({});
+    const currentInfo = ref({});
 
     // 搜索
     const keyword = ref('');
@@ -78,7 +70,7 @@ export default defineComponent({
     // 请求List
     const getList = async () => {
       loading.value = true;
-      const res = await order.list({
+      const res = await supplier.list({
         page: currentPage.value,
         keyword: keyword.value
       });
@@ -96,12 +88,12 @@ export default defineComponent({
         });
     }
 
-    // 获取需求list
+    // 获取list
     onMounted(async () => {
       getList();
     });
 
-    // 更新需求List
+    // 更新List
     const updateList = () => {
       getList();
     };
@@ -128,15 +120,15 @@ export default defineComponent({
     }
 
     // 删除方法
-    const removeOrder = (item) => {
+    const removeSupplier = (item) => {
       Modal.confirm({
-        title: '确认删除该订单吗？',
-        okText: '确认',
+        title: '确认删除该供应商信息吗？',
+        okText: '删除',
         cancelText: '取消',
         onCancel() {},
         onOk: async () => {
           const { _id } = item;
-          const res = await order.deleteOrder(_id);
+          const res = await supplier.deleteSupplier(_id);
           result(res)
             .success((data) => {
               message.success(data.msg);
@@ -149,21 +141,21 @@ export default defineComponent({
     
 
     // 修改的方法
-    const updateOrder = (data) => {
+    const updateSupplier = (data) => {
       showUpdate.value = true;
-      currentDemandInfo.value = data;
+      currentInfo.value = data;
     }
-
 
     // 跳转详情页面
     const goToDetail = (data) => {
       router.push({
-        path: `/orders/${data._id}`
+        path: `/suppliers/${data._id}`
       });
     }
 
     return {
       column,
+      showAdd,
       list,
       keyword,
       formatTimestamp,
@@ -172,7 +164,7 @@ export default defineComponent({
       currentPage,
       total,
       showUpdate,
-      currentDemandInfo,
+      currentInfo,
       loading,
       simple: props.simple,
 
@@ -182,9 +174,9 @@ export default defineComponent({
       updateList,
       search,
       back,
-      removeOrder,
-      updateOrder,
-      goToDetail
+      removeSupplier,
+      updateSupplier,
+      goToDetail,
     }
   }
 });

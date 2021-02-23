@@ -18,6 +18,7 @@ export default {
 <style lang="scss">
   body {
     background-color: #fafafa !important;
+    min-width: 1200px;
   }
 
   .hover-card {
