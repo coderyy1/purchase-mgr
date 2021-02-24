@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import Add from './Add/index.vue';
 import Update from './Update/index.vue';
 import Finish from './Finish/index.vue';
-import { demand, order } from '@/network';
+import { demand, order, supplier } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 // import { useStore } from 'vuex';
@@ -67,6 +67,9 @@ export default defineComponent({
 
     const total = ref(0);
 
+    // 供应商列表
+    const supplierInfo = ref([]);
+
     // const store = useStore();
 
     // 当前页数
@@ -89,6 +92,16 @@ export default defineComponent({
     const router = useRouter();
 
     const loading = ref(true);
+
+
+    // 获取供应商信息
+    const getSupplierList = async () => {
+      const res = await supplier.listAll();
+      result(res)
+        .success((data) => {
+          supplierInfo.value = data.data.list;
+        });
+    }
 
     // 请求List
     const getList = async () => {
@@ -113,7 +126,8 @@ export default defineComponent({
 
     // 获取需求list
     onMounted(async () => {
-      getList();
+      await getList();
+      await getSupplierList();
     });
 
     // 更新需求List
@@ -197,6 +211,7 @@ export default defineComponent({
       loading,
       simple: props.simple,
       showFinish,
+      supplierInfo,
 
 
 

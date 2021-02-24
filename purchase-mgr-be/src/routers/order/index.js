@@ -78,6 +78,13 @@ router.get('/list', async (ctx) => {
     })
     .skip((page - 1) * size)
     .limit(size)
+    .populate({
+      path: 'supplier',
+      select: {
+        name: 1,
+        _id: 1
+      }
+    })
     .exec();
 
   const total = await Order.find(query).countDocuments();
@@ -197,6 +204,13 @@ router.get('/detail/:id', async (ctx) => {
 
   const one = await Order.findOne({
     _id: id
+  })
+  .populate({
+    path: 'supplier',
+    select: {
+      name: 1,
+      _id: 1
+    }
   }).exec();
 
   if(!one) {
@@ -236,6 +250,13 @@ router.get('/listById', async (ctx) => {
     })
     .skip((page - 1) * size)
     .limit(size)
+    .populate({
+      path: 'supplier',
+      select: {
+        name: 1,
+        _id: 1
+      }
+    })
     .exec();
 
   const total = await Order.find({

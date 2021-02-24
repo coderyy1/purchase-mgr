@@ -7,6 +7,7 @@
           <h2>供应商详情</h2>
           <div class="actions">
             <a-button type="primary"
+            @click="addGoods"
             >
               添加商品
             </a-button>
@@ -66,16 +67,21 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
-          <template #time="data">
-            {{ formatTimestamp(data.text.meta.createdAt) }}
-          </template>
           <template #actions="data">
-            <a href="javascript:;" 
-                class="btn btn-info btn-sm"
-                @click="goOrderDetail(data.text)"
-            >
-                详情
-            </a>
+            <space-between>
+              <a href="javascript:;" 
+                class="btn btn-warning btn-sm"
+                @click="updateGoods(data.text)"
+              >
+                修改
+              </a>
+              <a href="javascript:;"
+                class="btn btn-danger btn-sm"
+                @click="removeGoods(data.text._id)"
+              >
+                删除
+              </a>
+            </space-between>
           </template>
         </a-table>
         <!-- 分页组件 -->
@@ -95,6 +101,20 @@
       v-model:isShow="showUpdate" 
       :info="s" 
       @updateList="getData(id)"
+    />
+
+    <!-- 修改供货信息的modal -->
+    <update-goods 
+      v-model:isShow="showUpdateGoods"
+      :info="currentGoodsInfo" 
+      @updateList="getGoodsList"
+    />
+
+    <!-- 添加供货信息的modal -->
+    <add
+      v-model:isShow="showAdd"
+      @updateList="getGoodsList"
+      :id="id"
     />
   </div>
 </template>

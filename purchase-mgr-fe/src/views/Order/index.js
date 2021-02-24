@@ -1,7 +1,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Update from './Update/index.vue';
-import { demand, order } from '@/network';
+import { supplier, order } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 // import { useStore } from 'vuex';
@@ -27,7 +27,9 @@ export default defineComponent({
       },
       {
         title: '供应商',
-        dataIndex: 'supplier',
+        slots: {
+          customRender: 'supplier'
+        }
       },
       {
         title: '操作者',
@@ -61,6 +63,8 @@ export default defineComponent({
 
     // 控制modal显示
     const showUpdate = ref(false);
+
+    const supplierInfo = ref([]);
 
     // 要传给修改modal中的数据
     const currentDemandInfo = ref({});
@@ -96,9 +100,19 @@ export default defineComponent({
         });
     }
 
+    // 获取全部供应商list
+    const getSupplierList = async () => {
+      const res = await supplier.listAll();
+      result(res)
+        .success((data) => {
+          supplierInfo.value = data.data.list;
+        });
+    }
+
     // 获取需求list
     onMounted(async () => {
-      getList();
+      await getList();
+      await getSupplierList();
     });
 
     // 更新需求List
@@ -175,6 +189,7 @@ export default defineComponent({
       currentDemandInfo,
       loading,
       simple: props.simple,
+      supplierInfo,
 
 
 

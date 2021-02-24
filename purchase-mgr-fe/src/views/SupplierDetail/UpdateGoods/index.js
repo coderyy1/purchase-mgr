@@ -1,5 +1,5 @@
 import { defineComponent, reactive, watch, ref } from 'vue';
-import { order } from '@/network/index';
+import { goods } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
 import moment from 'moment';
@@ -8,48 +8,43 @@ import moment from 'moment';
 export default defineComponent({
   props: {
     isShow: Boolean,
-    info:  Object,
-    supplier: Array
+    info:  Object
   },
   setup(props, context) {
     const updateForm = reactive({
       name: '',
-      supplier: '',
-      money: 0
+      price: 0,
+      place: ''
     });
+
 
     watch(() => props.info, (current) => {
       Object.assign(updateForm, current);
-      updateForm.supplier = updateForm.supplier._id;
     });
 
     const submit = async () => {
 
       // 表单校验
       if(updateForm.name === '') {
-        message.info('请输入货物名称');
+        message.info('请输入货物名');
 
         return;
       }
-      if(updateForm.supplier === '') {
-        message.info('请选择供应商');
+      if(updateForm.price === '') {
+        message.info('请输入报价');
 
         return;
       }
-      if(updateForm.money === '') {
-        message.info('请输入金额');
+      if(updateForm.place === '') {
+        message.info('请输入商品产地');
 
         return;
       }
 
-      const form = {
-        id: updateForm._id,
-        supplier: updateForm.supplier,
-        money: updateForm.money
-      };
+      const form = clone(updateForm);
 
       // 发送请求
-      const res = await order.update(form);
+      const res = await goods.update(form);
 
       // 处理结果
       result(res)

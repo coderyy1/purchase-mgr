@@ -1,13 +1,15 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { supplier } from '@/network';
+import { supplier, goods } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal } from 'ant-design-vue';
 import Update from '../SupplierList/Update/index.vue';
+import Add from './Add/index.vue';
+import UpdateGoods from './UpdateGoods/index.vue';
 
 export default defineComponent({
   components: {
-    Update
+    Update, Add, UpdateGoods
   },
   setup() {
     const column = [
@@ -16,28 +18,19 @@ export default defineComponent({
         dataIndex: 'name',
       },
       {
-        title: '数量',
-        dataIndex: 'num',
+        title: '产地',
+        dataIndex: 'place',
       },
       {
-        title: '供应商',
-        dataIndex: 'supplier',
-      },
-      {
-        title: '操作者',
-        dataIndex: 'user',
-      },
-      {
-        title: '添加时间',
-        slots: {
-          customRender: 'time'
-        }
+        title: '报价(每个)',
+        dataIndex: 'price',
       },
       {
         title: '操作',
         slots: {
           customRender: 'actions'
-        }
+        },
+        width: '160px'
       }
     ]
 
@@ -52,13 +45,17 @@ export default defineComponent({
     const id = route.params.id;
 
     const showUpdate = ref(false);
+    const showUpdateGoods = ref(false);
+    const showAdd = ref(false);
+
+    const currentGoodsInfo = ref();
 
     const supplierInfo = ref({});
 
     const topLoading = ref(true);
     const bottomLoading = ref(true);
 
-    const createdAt = ref('');
+    const keyword = ref('');
 
     // 获取详细信息的方法
     const getData = async (id) => {
@@ -67,42 +64,42 @@ export default defineComponent({
       result(res)
         .success(({data}) => {
           supplierInfo.value = data;
-          createdAt.value = data.meta.createdAt;
 
           topLoading.value = false;
         });
     }
 
     // 获取提供货物信息的方法
-    const getOrderList = async () => {
-      // bottomLoading.value = true;
-      // const res = await order.listById({
-      //   id,
-      //   page: currentPage.value
-      // });
+    const getGoodsList = async () => {
+      bottomLoading.value = true;
+      const res = await goods.supplierList({
+        id,
+        page: currentPage.value,
+        keyword: keyword.value
+      });
 
-      // result(res)
-      //   .success((data) => {
-      //     list.value = data.data.list;
-      //     total.value = data.data.total;
+      result(res)
+        .success((data) => {
+          list.value = data.data.list;
+          total.value = data.data.total;
 
-      //     bottomLoading.value = false;
-      //   });
+          bottomLoading.value = false;
+        });
     }
 
     // 切页的方法
     const setPage = (page) => {
       currentPage.value = page;
-      getOrderList();
+      getGoodsList();
     }
 
 
     onMounted( async () => {
       await getData(id);
-      // await getOrderList();
+      await getGoodsList();
     });
 
-    // 删除的方法
+    // 删除供应商的方法
     const removeSupplier = async () => {
       Modal.confirm({
         title: '确认删除该供应商吗?',
@@ -114,6 +111,34 @@ export default defineComponent({
             .success((data) => {
               message.success(data.msg);
               router.replace('/suppliers');
+            });
+        }
+      });
+    }
+
+    // 添加供货信息的方法
+    const addGoods = () => {
+      showAdd.value = true;
+    }
+
+    // 修改供货信息的方法
+    const updateGoods = (data) => {
+      showUpdateGoods.value = true;
+      currentGoodsInfo.value = data;
+    }
+
+    // 删除供货信息的方法
+    const removeGoods = async (goodsId) => {
+      Modal.confirm({
+        title: '确认删除该供货信息吗?',
+        okText: '确认删除',
+        cancelText: '取消',
+        onOk: async () => {
+          const res = await goods.deleteGoods(goodsId);
+          result(res)
+            .success((data) => {
+              message.success(data.msg);
+              getGoodsList();
             });
         }
       });
@@ -134,15 +159,23 @@ export default defineComponent({
       currentPage,
       total,
       bottomLoading,
-      setPage,
+      keyword,
       formatTimestamp,
       formatTimestamp2,
-      createdAt,
-      removeSupplier,
-      getData,
       showUpdate,
       topLoading,
-      back
+      showAdd,
+      showUpdateGoods,
+      currentGoodsInfo,
+      
+      setPage,
+      back,
+      removeSupplier,
+      getData,
+      addGoods,
+      getGoodsList,
+      removeGoods,
+      updateGoods
     }
   }
 });

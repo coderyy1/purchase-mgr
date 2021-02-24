@@ -38,6 +38,10 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
+          <!-- 供应商 -->
+          <template #supplier="data">
+            {{ data.text.supplier.name }}
+          </template>
           <!-- 添加时间 -->
           <template #time="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}
@@ -84,6 +88,7 @@
       v-model:isShow="showUpdate" 
       :info="currentDemandInfo"
       @updateList="updateList"
+      :supplier="supplierInfo"
     />
   </div>
 </template>

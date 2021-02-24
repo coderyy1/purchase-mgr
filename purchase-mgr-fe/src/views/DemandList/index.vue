@@ -131,6 +131,7 @@
       v-model:isShow="showFinish"
       @updateList="updateList"
       :info="currentDemandInfo"
+      :supplier="supplierInfo"
     />
 
     <!-- 修改的modal -->

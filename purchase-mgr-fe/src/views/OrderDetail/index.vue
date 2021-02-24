@@ -29,7 +29,7 @@
             </div>
             <div class="item-col">
               <div class="title">供应商</div>
-              <div class="content">{{ o.supplier }}</div>
+              <div class="content">{{ supplierName }}</div>
             </div>
           </div>
           <div class="item-row">
@@ -70,6 +70,7 @@
       v-model:isShow="showUpdate" 
       :info="o" 
       @updateList="getData(id)"
+      :supplier="supplierInfo"
     />
   </div>
 </template>

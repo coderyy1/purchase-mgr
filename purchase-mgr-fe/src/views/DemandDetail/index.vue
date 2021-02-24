@@ -72,9 +72,15 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
+          <!-- 供应商 -->
+          <template #supplier="data">
+            {{ data.text.supplier.name }}
+          </template>
+          <!-- 添加时间 -->
           <template #time="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}
           </template>
+          <!-- 操作 -->
           <template #actions="data">
             <a href="javascript:;" 
                 class="btn btn-info btn-sm"

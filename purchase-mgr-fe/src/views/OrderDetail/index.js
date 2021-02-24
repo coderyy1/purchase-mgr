@@ -1,6 +1,6 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { order } from '@/network';
+import { order, supplier } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal } from 'ant-design-vue';
 import Update from '../Order/Update/index.vue';
@@ -14,6 +14,8 @@ export default defineComponent({
     const router = useRouter();
     const id = route.params.id;
 
+    const supplierInfo = ref([]);
+
     const showUpdate = ref(false);
 
     const orderInfo = ref({});
@@ -21,6 +23,8 @@ export default defineComponent({
     const topLoading = ref(true);
 
     const createdAt = ref('');
+
+    const supplierName = ref('');
 
     // 获取订单信息的方法
     const getData = async (id) => {
@@ -30,8 +34,18 @@ export default defineComponent({
         .success(({data}) => {
           orderInfo.value = data;
           createdAt.value = data.meta.createdAt;
+          supplierName.value = data.supplier.name;
 
           topLoading.value = false;
+        });
+    }
+
+    //获取供应商列表的方法
+    const getSupplierList = async () => {
+      const res = await supplier.listAll();
+      result(res)
+        .success((data) => {
+          supplierInfo.value = data.data.list;
         });
     }
 
@@ -39,6 +53,7 @@ export default defineComponent({
 
     onMounted( async () => {
       await getData(id);
+      await getSupplierList();
     });
 
     // 删除订单的方法
@@ -76,6 +91,8 @@ export default defineComponent({
       formatTimestamp,
       formatTimestamp2,
       createdAt,
+      supplierName,
+      supplierInfo,
       removeOrder,
       getData,
       showUpdate,

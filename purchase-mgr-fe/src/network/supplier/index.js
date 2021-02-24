@@ -10,6 +10,11 @@ export const list = (data) => {
   return get('/supplier/list', data);
 }
 
+//获取全部供应商list
+export const listAll = () => {
+  return get('/supplier/all');
+}
+
 //删除供应商的请求
 export const deleteSupplier = (id) => {
   return del(`/supplier/deleteSupplier/${id}`);

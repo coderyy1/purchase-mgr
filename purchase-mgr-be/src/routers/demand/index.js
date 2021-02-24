@@ -4,6 +4,7 @@ const config = require('../../project.config');
 
 //=========================================================
 const Demand = mongoose.model('Demand');
+const Order = mongoose.model('Order');
 
 const router = new Router({
   prefix: '/demand'
@@ -113,6 +114,11 @@ router.delete('/deleteDemand/:id', async (ctx) => {
 
   const res = await Demand.deleteOne({
     _id: id
+  });
+
+  //删除对应订单信息
+  await Order.deleteMany({
+  demandId: id
   });
 
   ctx.body = {

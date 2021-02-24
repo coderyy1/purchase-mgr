@@ -21,7 +21,9 @@ export default defineComponent({
       },
       {
         title: '供应商',
-        dataIndex: 'supplier',
+        slots: {
+          customRender: 'supplier'
+        }
       },
       {
         title: '操作者',

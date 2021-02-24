@@ -1,31 +1,21 @@
-import { defineComponent, reactive, watch, ref } from 'vue';
-import { demand, order } from '@/network/index';
+import { defineComponent, reactive } from 'vue';
+import { goods } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
 
 const defaultFormData = {
   name: '',
-  num: 0,
-  supplier: '',
-  user: '',
-  money: 0,
+  price: 0,
+  place: ''
 };
 
 export default defineComponent({
   props: {
     isShow: Boolean,
-    info: Object,
-    supplier: Array
+    id: String
   },
   setup(props, context) {
     const addForm = reactive(clone(defaultFormData));
-    const maxCount = ref(99999999);
-
-    watch(() => props.info, (current) => {
-      addForm.id = props.info._id;
-      addForm.name = props.info.name;
-      maxCount.value = props.info.num;
-    });
 
     const submit = async () => {
 
@@ -35,26 +25,22 @@ export default defineComponent({
 
         return;
       }
-      if(addForm.num === '') {
-        message.info('请输入数量');
+      if(addForm.price === '') {
+        message.info('请输入报价');
 
         return;
       }
-      if(addForm.supplier === '') {
-        message.info('请选择供应商');
-
-        return;
-      }
-      if(addForm.money === '') {
-        message.info('请输入订单金额');
+      if(addForm.place === '') {
+        message.info('请输入商品产地');
 
         return;
       }
 
       const form = clone(addForm);
+      form.id = props.id;
 
       // 发送请求
-      const res = await order.add(form);
+      const res = await goods.add(form);
 
       // 处理结果
       result(res)
@@ -78,7 +64,6 @@ export default defineComponent({
 
     return {
       addForm,
-      maxCount,
       submit,
       props,
       close

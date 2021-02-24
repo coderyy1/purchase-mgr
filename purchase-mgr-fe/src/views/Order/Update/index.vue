@@ -16,7 +16,18 @@
            />
         </a-form-item>
         <a-form-item label="供应商">
-          <a-input v-model:value="updateForm.supplier" allowClear/>
+          <a-select
+          v-model:value="updateForm.supplier"
+            style="width: 220px;"
+          >
+            <a-select-option 
+              v-for="(item, index) of props.supplier"
+              :key="index"
+              :value="item._id"
+            >
+              {{item.name}}
+            </a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item label="金额">
           <a-input-number v-model:value="updateForm.money" :min="0" :max="99999999" />
