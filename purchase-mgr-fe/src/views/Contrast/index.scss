@@ -1,0 +1,28 @@
+.wrapper {
+  .title {
+    font-weight: 600;
+  }
+
+  .search {
+    width: 250px;
+  }
+
+  .pagi {
+    margin-top: 12px;
+  }
+
+  .search-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      margin-left: 12px;
+    }
+
+    
+
+  }
+
+
+}

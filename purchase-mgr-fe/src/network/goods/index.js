@@ -20,3 +20,8 @@ export const update = (data) => {
   return post('/goods/update', data);
 }
 
+//获取list、查询的请求(报价比对界面)
+export const list = (data) => {
+  return get('/goods/list', data);
+}
+

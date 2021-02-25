@@ -107,6 +107,57 @@ router.get('/supplierList', async (ctx) => {
   };
 });
 
+// 查询列表的接口(报价比对界面)----------------------------------
+router.get('/list', async (ctx) => {
+  const {
+    page = 1,
+    size = 5,
+    keyword = '',
+    type = 'ascend'
+  } = ctx.query;
+
+  const query = {};
+  if(keyword) {
+    query.name = keyword
+  }
+
+  if(type === 'ascend') {
+    sortType = 1;
+  }else {
+    sortType = -1;
+  }
+
+  const list = await Goods
+    .find(query)
+    .sort({
+      price: sortType
+    })
+    .skip((page - 1) * size)
+    .limit(size)
+    .populate({
+      path: 'supplier',
+      select: {
+        name: 1,
+        tel: 1,
+        contacts: 1
+      }
+    })
+    .exec();
+
+    const total = await Goods.find(query).countDocuments();
+
+    ctx.body = {
+      code: 1,
+      msg: '获取列表成功',
+      data: {
+        total,
+        list,
+        page,
+        size
+      }
+    };
+});
+
 // 删除供货信息接口-----------------------------------------------
 router.delete('/deleteGoods/:id', async (ctx) => {
   const {

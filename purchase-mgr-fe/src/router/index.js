@@ -55,6 +55,13 @@ const routes = [
         path: '/suppliers/:id',
         name: 'SupplierDetail',
         component: () => import(/* webpackChunkName: "SupplierDetail" */'../views/SupplierDetail/index.vue')
+      },
+
+      // 报价比对界面
+      {
+        path: '/contrast',
+        name: 'Contrast',
+        component: () => import(/* webpackChunkName: "Contrast" */'../views/Contrast/index.vue')
       }
     ]
   }
