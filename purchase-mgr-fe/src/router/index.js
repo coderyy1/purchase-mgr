@@ -62,6 +62,20 @@ const routes = [
         path: '/contrast',
         name: 'Contrast',
         component: () => import(/* webpackChunkName: "Contrast" */'../views/Contrast/index.vue')
+      },
+
+      // 库存信息界面
+      {
+        path: '/stocks',
+        name: 'Stocks',
+        component: () => import(/* webpackChunkName: "Stocks" */'../views/Stock/index.vue')
+      },
+
+      // 库存详情界面
+      {
+        path: '/stocks/:id',
+        name: 'StocksDetail',
+        component: () => import(/* webpackChunkName: "StocksDetail" */'../views/StockDetail/index.vue')
       }
     ]
   }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const { getMeta, preSave } = require('../helpers');
 
 const DemandSchema = new mongoose.Schema({
@@ -6,7 +7,10 @@ const DemandSchema = new mongoose.Schema({
   num: Number,  //数量
   finishNum: Number, //已完成数量
   endTime: String,  //截止时间
-  publisher: String, //发布者
+  publisher: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }, //发布者
   state: Number, //状态 -> 1:未完成  2:已完成
 
   meta: getMeta()

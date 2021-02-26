@@ -1,6 +1,5 @@
 const Router = require('@koa/router');
 const mongoose = require('mongoose');
-const config = require('../../project.config');
 
 const Demand = mongoose.model('Demand');
 const Order = mongoose.model('Order');
