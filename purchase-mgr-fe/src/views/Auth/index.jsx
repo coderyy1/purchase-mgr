@@ -3,10 +3,11 @@ import { UserOutlined, DisconnectOutlined, LockOutlined } from '@ant-design/icon
 import { auth } from '@/network';
 import { message, Modal, Input } from 'ant-design-vue';
 import { result } from '../../helpers/utils/index';
-// import store from '@/store';
-// import { getCharacterInfoById } from '@/helpers/character';
+import store from '@/store';
 import { useRouter } from 'vue-router';
-// import { setToken, getToken } from '@/helpers/token/index';
+import { setToken, getToken } from '@/helpers/token/index';
+import { getCharacterInfoById } from '@/helpers/character';
+import axios from 'axios';
 
 
 export default defineComponent({
@@ -99,15 +100,15 @@ export default defineComponent({
         .success((data) => {
           message.success(data.data.user.account + data.msg);
           // 存储用户信息 -> vuex
-          // store.commit('setUserInfo', data.data.user);
-          // store.commit('setUserCharacter', getCharacterInfoById(data.data.user.character));
+          store.commit('setUserInfo', data.data.user);
+          store.commit('setUserCharacter', getCharacterInfoById(data.data.user.character._id));
           // 存储token -> sessionStorage
-          // setToken(data.data.token);
+          setToken(data.data.token);
 
           // 更新axios请求头内容
-          // axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
+          axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
 
-          // router.replace('/books')
+          router.replace('/demands')
         });
     }
 

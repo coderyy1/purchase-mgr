@@ -11,7 +11,8 @@ const router = new Router({
 // 添加邀请码的接口------------------------------------------------------------------------------------
 router.get('/add', async (ctx) => {
   let {
-    count = 1
+    count = 1,
+    type
   } = ctx.request.query;
 
   count = Number(count);
@@ -21,7 +22,8 @@ router.get('/add', async (ctx) => {
   for(let i = 0; i < count; i ++) {
     arr.push({
       code: uuidv4(),
-      user: ''
+      user: '',
+      character: type
     });
   }
 

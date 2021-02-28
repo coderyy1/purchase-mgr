@@ -1,4 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import store from '@/store';
+import { message } from 'ant-design-vue';
+import { getToken } from '@/helpers/token/index';
 
 const routes = [
   // 登陆界面
@@ -76,6 +79,20 @@ const routes = [
         path: '/stocks/:id',
         name: 'StocksDetail',
         component: () => import(/* webpackChunkName: "StocksDetail" */'../views/StockDetail/index.vue')
+      },
+
+      // 用户管理界面
+      {
+        path: '/users',
+        name: 'User',
+        component: () => import(/* webpackChunkName: "User" */'../views/Users/index.vue')
+      },
+
+      // 邀请码管理界面
+      {
+        path: '/invite',
+        name: 'Invite',
+        component: () => import(/* webpackChunkName: "Invite" */'../views/Invite/index.vue')
       }
     ]
   }
@@ -85,5 +102,42 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+router.beforeEach(async (to, from, next) => {
+
+
+
+  // 获取权限列表
+  if(!store.state.characterInfo.length) {
+      await store.dispatch('getCharacterInfo');
+    }
+
+  // 登陆拦截
+  if(to.path !== '/auth') {
+    if(!getToken()) {
+      next('/auth');
+      message.error('认证失败，请重新登录');
+      return;
+    }
+  }
+
+
+
+  // 不能访问登陆页
+  if(to.path === '/auth' && getToken()) {
+      next('/demands');
+      return;
+  }
+
+  // 通过token获取用户信息 -> 只有不是从登陆页面来的才需要获取
+  if(from.path !== '/auth' && !store.state.userInfo.account) {
+
+    if(getToken()) {
+      await store.dispatch('getUserInfo');
+    }
+  }
+
+  next();
+});
 
 export default router

@@ -5,6 +5,7 @@ const config = require('../../project.config');
 
 const User = mongoose.model('User');
 const InviteCode = mongoose.model('InviteCode');
+const Character = mongoose.model('Character');
 
 const router = new Router({
   prefix: '/auth'
@@ -72,9 +73,24 @@ router.post('/register', async (ctx) => {
     return;
   }
 
+  const characterOne = await Character.findOne({
+    _id: findCode.character
+  }).exec();
+
+  if(!characterOne) {
+    ctx.body = {
+      code : 0,
+      msg: '邀请码错误',
+      data: null
+    };
+
+    return;
+  }
+
   const user = new User({
     account,
-    password
+    password,
+    character: characterOne._id
   });
 
   // 成功保存到数据库后设定邀请码对应的user
@@ -110,7 +126,15 @@ router.post('/login', async (ctx) => {
 
   const one = await User.findOne({
     account
-  }).exec();
+  })
+  .populate({
+    path: 'character',
+    select: {
+      _id: 1,
+      title: 1
+    }
+  })
+  .exec();
 
   if(!one) {
     ctx.body = {

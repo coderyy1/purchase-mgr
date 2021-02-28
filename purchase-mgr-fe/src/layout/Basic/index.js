@@ -1,15 +1,15 @@
 import { defineComponent } from 'vue';
-// import Nav from './Nav/index.vue';
-// import { setToken } from '@/helpers/token';
-// import { useStore } from 'vuex';
+import Nav from '../Nav/index.vue';
+import { setToken } from '@/helpers/token';
+import { useStore } from 'vuex';
 import { Modal, message } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
-    // AppNav: Nav
+    AppNav: Nav
   },
   setup() {
-    // const store = useStore();
+    const store = useStore();
 
     const logout = () => {
       Modal.confirm({
@@ -17,7 +17,7 @@ export default defineComponent({
         cancelText: '取消',
         okText: '确认登出',
         onOk: () => {
-          // setToken('');
+          setToken('');
 
           window.location.href = '/';
         }
@@ -30,7 +30,7 @@ export default defineComponent({
 
 
     return {
-      // store,
+      store,
       logout,
       goHome
     }

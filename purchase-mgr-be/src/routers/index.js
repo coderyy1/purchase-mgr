@@ -6,6 +6,8 @@ const supplier = require('./supplier/index');
 const goods = require('./goods/index');
 const stock = require('./stock/index');
 const countLog = require('./count-log/index');
+const character = require('./character/index');
+const user = require('./user/index');
 
 
 module.exports = (app) => {
@@ -17,4 +19,6 @@ module.exports = (app) => {
   app.use(goods.routes());
   app.use(stock.routes());
   app.use(countLog.routes());
+  app.use(character.routes());
+  app.use(user.routes());
 };

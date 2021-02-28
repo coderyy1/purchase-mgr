@@ -6,6 +6,7 @@ require('./Schemas/Supplier');
 require('./Schemas/Goods');
 require('./Schemas/Stock');
 require('./Schemas/CountLog');
+require('./Schemas/Character');
 const mongoose = require('mongoose');
 
 // 修复mongoose弃用警告

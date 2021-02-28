@@ -7,7 +7,7 @@
       </a>
       <div class="h-right">
         <div class="hello-msg">
-          {{ `xxx,欢迎！` }}
+          {{ `${store.state.userInfo.account},欢迎！` }}
         </div>
         <div class="logout" @click="logout">退出</div>
       </div>
@@ -16,7 +16,7 @@
 
     <div class="content">
       <div class="left">
-        <!-- <app-nav/> -->
+        <app-nav/>
       </div>
       <div class="right">
         <router-view />
