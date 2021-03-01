@@ -6,7 +6,6 @@ import Finish from './Finish/index.vue';
 import { demand, order, supplier } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
-// import { useStore } from 'vuex';
 
 
 
@@ -51,7 +50,9 @@ export default defineComponent({
       },
       {
         title: '发布者',
-        dataIndex: 'publisher'
+        slots: {
+          customRender: 'publisher'
+        }
       },
       {
         title: '操作',
@@ -70,7 +71,6 @@ export default defineComponent({
     // 供应商列表
     const supplierInfo = ref([]);
 
-    // const store = useStore();
 
     // 当前页数
     const currentPage = ref(1);

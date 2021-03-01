@@ -4,7 +4,6 @@ import Update from './Update/index.vue';
 import { supplier, order } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
-// import { useStore } from 'vuex';
 
 
 
@@ -33,7 +32,9 @@ export default defineComponent({
       },
       {
         title: '操作者',
-        dataIndex: 'user',
+        slots: {
+          customRender: 'user'
+        }
       },
       {
         title: '添加时间',
@@ -55,8 +56,6 @@ export default defineComponent({
     const list = ref([]);
 
     const total = ref(0);
-
-    // const store = useStore();
 
     // 当前页数
     const currentPage = ref(1);

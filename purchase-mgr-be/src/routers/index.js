@@ -8,6 +8,7 @@ const stock = require('./stock/index');
 const countLog = require('./count-log/index');
 const character = require('./character/index');
 const user = require('./user/index');
+const profile = require('./profile/index');
 
 
 module.exports = (app) => {
@@ -21,4 +22,5 @@ module.exports = (app) => {
   app.use(countLog.routes());
   app.use(character.routes());
   app.use(user.routes());
+  app.use(profile.routes());
 };

@@ -27,7 +27,9 @@ export default defineComponent({
       },
       {
         title: '操作者',
-        dataIndex: 'user',
+        slots: {
+          customRender: 'user'
+        }
       },
       {
         title: '添加时间',
@@ -39,7 +41,8 @@ export default defineComponent({
         title: '操作',
         slots: {
           customRender: 'actions'
-        }
+        },
+        width: '180px'
       }
     ]
 
@@ -61,6 +64,7 @@ export default defineComponent({
     const bottomLoading = ref(true);
 
     const createdAt = ref('');
+    const publisher = ref('');
 
     // 获取需求信息的方法
     const getData = async (id) => {
@@ -70,6 +74,7 @@ export default defineComponent({
         .success(({data}) => {
           demandInfo.value = data;
           createdAt.value = data.meta.createdAt;
+          publisher.value = data.publisher.account;
 
           topLoading.value = false;
         });
@@ -121,6 +126,25 @@ export default defineComponent({
       });
     }
 
+        // 删除订单的方法
+        const removeOrder = (item) => {
+          Modal.confirm({
+            title: '确认删除该订单吗？',
+            okText: '确认',
+            cancelText: '取消',
+            onCancel() {},
+            onOk: async () => {
+              const { _id } = item;
+              const res = await order.deleteOrder(_id);
+              result(res)
+                .success((data) => {
+                  message.success(data.msg);
+                  getList();
+                })
+            }
+          })
+        }
+
     // 返回需求列表的方法
     const back = () => {
       router.replace({
@@ -143,16 +167,19 @@ export default defineComponent({
       currentPage,
       total,
       bottomLoading,
-      setPage,
+      publisher,
       formatTimestamp,
       formatTimestamp2,
       createdAt,
-      removeDemand,
-      getData,
       showUpdate,
       topLoading,
+
       back,
-      goOrderDetail
+      goOrderDetail,
+      removeOrder,
+      removeDemand,
+      getData,
+      setPage,
     }
   }
 });

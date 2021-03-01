@@ -61,6 +61,10 @@
           <template #state="data">
             {{ data.text.state === 1 ? '未完成' : '已完成' }}
           </template>
+          <!-- 发布者 -->
+          <template #publisher="data">
+            {{ data.text.publisher.account }}
+          </template>
           <!-- 发布日期 -->
           <template #startTime="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}

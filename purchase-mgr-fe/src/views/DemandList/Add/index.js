@@ -1,7 +1,8 @@
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { demand } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import store from '@/store';
 
 const defaultFormData = {
   name: '',
@@ -37,6 +38,7 @@ export default defineComponent({
 
       const form = clone(addForm);
       form.endTime = addForm.endTime.valueOf();
+      form.publisher = store.state.userInfo._id;
 
       // 发送请求
       const res = await demand.add(form);
@@ -65,7 +67,7 @@ export default defineComponent({
       addForm,
       submit,
       props,
-      close
+      close,
     }
   }
 });

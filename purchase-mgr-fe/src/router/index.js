@@ -15,6 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
+    redirect: '/auth',
     component: () => import(/* webpackChunkName: "BasicLayout" */'../layout/Basic/index.vue'),
     children: [
 
@@ -22,6 +23,10 @@ const routes = [
       {
         path: '/demands',
         name: 'DemandList',
+        meta: {
+          title: '',
+          navUrl: '/demands'
+        },
         component: () => import(/* webpackChunkName: "DemandList" */'../views/DemandList/index.vue')
       },
 
@@ -29,6 +34,10 @@ const routes = [
       {
         path: '/demands/:id',
         name: 'DemandDetail',
+        meta: {
+          title: '',
+          navUrl: '/demands'
+        },
         component: () => import(/* webpackChunkName: "DemandDetail" */'../views/DemandDetail/index.vue')
       },
 
@@ -36,6 +45,10 @@ const routes = [
       {
         path: '/orders',
         name: 'OrderList',
+        meta: {
+          title: '',
+          navUrl: '/orders'
+        },
         component: () => import(/* webpackChunkName: "OrderList" */'../views/Order/index.vue')
       },
 
@@ -43,6 +56,10 @@ const routes = [
       {
         path: '/orders/:id',
         name: 'OrderDetail',
+        meta: {
+          title: '',
+          navUrl: '/orders'
+        },
         component: () => import(/* webpackChunkName: "OrderDetail" */'../views/OrderDetail/index.vue')
       },
 
@@ -50,6 +67,10 @@ const routes = [
       {
         path: '/suppliers',
         name: 'SupplierList',
+        meta: {
+          title: '',
+          navUrl: '/suppliers'
+        },
         component: () => import(/* webpackChunkName: "SupplierList" */'../views/SupplierList/index.vue')
       },
 
@@ -57,6 +78,10 @@ const routes = [
       {
         path: '/suppliers/:id',
         name: 'SupplierDetail',
+        meta: {
+          title: '',
+          navUrl: '/suppliers'
+        },
         component: () => import(/* webpackChunkName: "SupplierDetail" */'../views/SupplierDetail/index.vue')
       },
 
@@ -64,6 +89,10 @@ const routes = [
       {
         path: '/contrast',
         name: 'Contrast',
+        meta: {
+          title: '',
+          navUrl: '/contrast'
+        },
         component: () => import(/* webpackChunkName: "Contrast" */'../views/Contrast/index.vue')
       },
 
@@ -71,6 +100,10 @@ const routes = [
       {
         path: '/stocks',
         name: 'Stocks',
+        meta: {
+          title: '',
+          navUrl: '/stocks'
+        },
         component: () => import(/* webpackChunkName: "Stocks" */'../views/Stock/index.vue')
       },
 
@@ -78,6 +111,10 @@ const routes = [
       {
         path: '/stocks/:id',
         name: 'StocksDetail',
+        meta: {
+          title: '',
+          navUrl: '/stocks'
+        },
         component: () => import(/* webpackChunkName: "StocksDetail" */'../views/StockDetail/index.vue')
       },
 
@@ -85,6 +122,10 @@ const routes = [
       {
         path: '/users',
         name: 'User',
+        meta: {
+          title: '',
+          navUrl: '/users'
+        },
         component: () => import(/* webpackChunkName: "User" */'../views/Users/index.vue')
       },
 
@@ -92,7 +133,22 @@ const routes = [
       {
         path: '/invite',
         name: 'Invite',
+        meta: {
+          title: '',
+          navUrl: '/invite'
+        },
         component: () => import(/* webpackChunkName: "Invite" */'../views/Invite/index.vue')
+      },
+
+      // 修改密码界面
+      {
+        path: '/profile',
+        name: 'Profile',
+        meta: {
+          title: '',
+          navUrl: '/profile'
+        },
+        component: () => import(/* webpackChunkName: "Profile" */'../views/Profile/index.vue')
       }
     ]
   }

@@ -8,4 +8,5 @@ export * as countLog from './count-log';
 export * as character from './character';
 export * as user from './user';
 export * as invite from './invite-code';
+export * as profile from './profile';
 

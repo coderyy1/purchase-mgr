@@ -98,7 +98,7 @@ export default defineComponent({
 
       result(res)
         .success((data) => {
-          message.success(data.data.user.account + data.msg);
+          message.success(`' ${data.data.user.account} '  ${data.msg}`);
           // 存储用户信息 -> vuex
           store.commit('setUserInfo', data.data.user);
           store.commit('setUserCharacter', getCharacterInfoById(data.data.user.character._id));

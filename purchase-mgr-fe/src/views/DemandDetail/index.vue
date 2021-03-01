@@ -35,7 +35,7 @@
           <div class="item-row">
             <div class="item-col">
               <div class="title">发布者</div>
-              <div class="content">{{ d.publisher }}</div>
+              <div class="content">{{ publisher }}</div>
             </div>
             <div class="item-col">
               <div class="title">已完成数量</div>
@@ -63,7 +63,7 @@
     </a-spin>
 
     <a-spin :spinning="bottomLoading">
-      <a-card class="hover-card wrapper log">
+      <a-card class="hover-card wrapper log" title="订单列表">
         <a-table 
           rowKey="_id" 
           :columns="column" 
@@ -76,18 +76,30 @@
           <template #supplier="data">
             {{ data.text.supplier.name }}
           </template>
+          <!-- 操作者 -->
+          <template #user="data">
+            {{ data.text.user.account }}
+          </template>
           <!-- 添加时间 -->
           <template #time="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}
           </template>
           <!-- 操作 -->
           <template #actions="data">
-            <a href="javascript:;" 
+            <space-between>
+              <a href="javascript:;" 
                 class="btn btn-info btn-sm"
                 @click="goOrderDetail(data.text)"
-            >
-                详情
-            </a>
+              >
+                  详情
+              </a>
+              <a href="javascript:;"
+                  class="btn btn-danger btn-sm"
+                  @click="removeOrder(data.text)"
+              >
+                  删除
+              </a>
+            </space-between>
           </template>
         </a-table>
         <!-- 分页组件 -->

@@ -42,6 +42,10 @@
           <template #supplier="data">
             {{ data.text.supplier.name }}
           </template>
+          <!-- 操作者 -->
+          <template #user="data">
+            {{ data.text.user.account }}
+          </template>
           <!-- 添加时间 -->
           <template #time="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}

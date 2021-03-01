@@ -91,10 +91,13 @@
             :pagination="false"
           >
             <template #type="data">
-              {{data.text.type === 'IN_COUNT' ? '入库' : '出库'}}
+              {{ data.text.type === 'IN_COUNT' ? '入库' : '出库' }}
             </template>
             <template #createdAt="data">
-              {{formatTimestamp(data.text.meta.createdAt)}}
+              {{ formatTimestamp(data.text.meta.createdAt) }}
+            </template>
+            <template #user="data">
+              {{ data.text.user.account }}
             </template>
           </a-table>
           <space-between class="pagi">

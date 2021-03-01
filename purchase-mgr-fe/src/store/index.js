@@ -5,8 +5,11 @@ import { getCharacterInfoById } from '@/helpers/character';
 
 export default createStore({
   state: {
+    // 角色信息
     characterInfo: [],
+    // 用户信息
     userInfo: {},
+    // 用户权限信息
     userCharacter: {},
   },
   mutations: {

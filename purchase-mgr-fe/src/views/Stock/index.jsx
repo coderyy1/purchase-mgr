@@ -5,7 +5,7 @@ import Update from './Update/index.vue';
 import { stock } from '@/network';
 import { result, formatTimestamp } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 
 
 export default defineComponent({
@@ -58,7 +58,7 @@ export default defineComponent({
 
     const total = ref(0);
 
-    // const store = useStore();
+    const store = useStore();
 
     // 当前页数
     const currentPage = ref(1);
@@ -173,7 +173,8 @@ export default defineComponent({
           const res = await stock.count({
             id: data._id,
             type,
-            num: el.value
+            num: el.value,
+            user: store.state.userInfo._id
           });
 
           result(res)

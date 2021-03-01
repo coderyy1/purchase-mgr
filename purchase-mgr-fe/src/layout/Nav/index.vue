@@ -3,7 +3,7 @@
     <a-menu
       id="dddddd"
       style="width: 100%"
-      v-model:selectedKeys="selectedKeys"
+      v-model:selectedKeys="keys"
       mode="inline"
       v-for="item of menu"
       :key="item.url"

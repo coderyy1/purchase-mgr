@@ -25,6 +25,7 @@ export default defineComponent({
     const createdAt = ref('');
 
     const supplierName = ref('');
+    const userName = ref('');
 
     // 获取订单信息的方法
     const getData = async (id) => {
@@ -35,6 +36,7 @@ export default defineComponent({
           orderInfo.value = data;
           createdAt.value = data.meta.createdAt;
           supplierName.value = data.supplier.name;
+          userName.value = data.user.account;
 
           topLoading.value = false;
         });
@@ -93,10 +95,12 @@ export default defineComponent({
       createdAt,
       supplierName,
       supplierInfo,
-      removeOrder,
-      getData,
+      userName,
       showUpdate,
       topLoading,
+      
+      removeOrder,
+      getData,
       back,
       goDemandDetail
     }

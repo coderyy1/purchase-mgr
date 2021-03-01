@@ -2,6 +2,7 @@ import { defineComponent, reactive, watch, ref } from 'vue';
 import { demand, order } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import store from '@/store';
 
 const defaultFormData = {
   name: '',
@@ -52,6 +53,7 @@ export default defineComponent({
       }
 
       const form = clone(addForm);
+      form.user = store.state.userInfo._id;
 
       // 发送请求
       const res = await order.add(form);

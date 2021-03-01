@@ -44,7 +44,9 @@ export default defineComponent({
       },
       {
         title: '操作者',
-        dataIndex: 'user'
+        slots: {
+          customRender: 'user'
+        }
       },
       {
         title: '操作时间',

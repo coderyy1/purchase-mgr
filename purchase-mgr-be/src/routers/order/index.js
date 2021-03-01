@@ -84,6 +84,13 @@ router.get('/list', async (ctx) => {
         _id: 1
       }
     })
+    .populate({
+      path: 'user',
+      select: {
+        _id: 1,
+        account: 1
+      }
+    })
     .exec();
 
   const total = await Order.find(query).countDocuments();
@@ -210,7 +217,15 @@ router.get('/detail/:id', async (ctx) => {
       name: 1,
       _id: 1
     }
-  }).exec();
+  })
+  .populate({
+    path: 'user',
+    select: {
+      _id: 1,
+      account: 1
+    }
+  })
+  .exec();
 
   if(!one) {
     ctx.body = {
@@ -254,6 +269,13 @@ router.get('/listById', async (ctx) => {
       select: {
         name: 1,
         _id: 1
+      }
+    })
+    .populate({
+      path: 'user',
+      select: {
+        _id: 1,
+        account: 1
       }
     })
     .exec();

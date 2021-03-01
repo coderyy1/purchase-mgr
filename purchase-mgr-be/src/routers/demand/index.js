@@ -76,6 +76,13 @@ router.get('/list', async (ctx) => {
     })
     .skip((page - 1) * size)
     .limit(size)
+    .populate({
+      path: 'publisher',
+      select: {
+        _id: 1,
+        account: 1
+      }
+    })
     .exec();
 
   const total = await Demand.find(query).countDocuments();
@@ -184,9 +191,18 @@ router.get('/detail/:id', async (ctx) => {
     id
   } = ctx.params;
 
-  const one = await Demand.findOne({
+  const one = await Demand
+  .findOne({
     _id: id
-  }).exec();
+  })
+  .populate({
+    path: 'publisher',
+    select: {
+      _id: 1,
+      account: 1
+    }
+  })
+  .exec();
 
   if(!one) {
     ctx.body = {

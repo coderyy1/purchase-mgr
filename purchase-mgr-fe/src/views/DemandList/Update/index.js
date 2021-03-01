@@ -56,7 +56,7 @@ export default defineComponent({
         num: updateForm.num,
         endTime: updateForm.endTime,
         state: updateForm.state,
-        finishNum: updateForm.state === 1 ? finishNum.value : updateForm.num
+        finishNum: finishNum.value
       };
       form.endTime = updateForm.endTime.valueOf();
 

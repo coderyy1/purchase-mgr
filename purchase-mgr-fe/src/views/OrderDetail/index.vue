@@ -35,7 +35,7 @@
           <div class="item-row">
             <div class="item-col">
               <div class="title">操作者</div>
-              <div class="content">{{ o.user }}</div>
+              <div class="content">{{ userName }}</div>
             </div>
             <div class="item-col">
               <div class="title">总金额</div>

@@ -27,6 +27,13 @@ router.get('/list', async (ctx) => {
     })
     .skip((page - 1) * size)
     .limit(size)
+    .populate({
+      path: 'user',
+      select: {
+        _id: 1,
+        account: 1
+      }
+    })
     .exec();
 
   const total = await CountLog

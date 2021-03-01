@@ -166,7 +166,8 @@ router.post('/update', async (ctx) => {
 router.post('/update/count', async (ctx) => {
   const {
     id,
-    type
+    type,
+    user
   } = ctx.request.body;
 
   let {
@@ -214,7 +215,8 @@ router.post('/update/count', async (ctx) => {
   const log = new CountLog({
     stockId: id,
     type,
-    num: Math.abs(num)
+    num: Math.abs(num),
+    user
   });
 
   log.save();
