@@ -1,10 +1,11 @@
 import { post } from '@/helpers/request/index';
 
-export const register = (account, password, inviteCode) => {
+export const register = (account, password, inviteCode, key = '') => {
   return post('/auth/register', {
     account,
     password,
-    inviteCode
+    inviteCode,
+    key
   });
 };
 

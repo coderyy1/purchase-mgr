@@ -102,7 +102,7 @@ export default defineComponent({
         okText: '确认',
         cancelText: '取消',
         onOk: async () => {
-          const res = await user.resetPwd(id);
+          const res = await user.resetPwdAdmin({id});
           result(res)
             .success((data) => {
               message.success(data.msg);

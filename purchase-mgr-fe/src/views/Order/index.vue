@@ -62,12 +62,14 @@
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateOrder(data.text)"
+                v-over-buyer
               >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="removeOrder(data.text)"
+                v-over-buyer
               >
                 删除
               </a>
@@ -93,6 +95,7 @@
       :info="currentDemandInfo"
       @updateList="updateList"
       :supplier="supplierInfo"
+      v-over-buyer
     />
   </div>
 </template>

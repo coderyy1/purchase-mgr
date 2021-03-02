@@ -10,35 +10,43 @@ export default defineComponent({
     const menu = [
       {
         title: '需求列表',
-        url: '/demands'
+        url: '/demands',
+        onlyAdmin: false
       },
       {
         title: '已完成订单',
-        url: '/orders'
+        url: '/orders',
+        onlyAdmin: false
       },
       {
         title: '供应商信息',
-        url: '/suppliers'
+        url: '/suppliers',
+        onlyAdmin: false
       },
       {
         title: '报价对比',
-        url: '/contrast'
+        url: '/contrast',
+        onlyAdmin: false
       },
       {
         title: '库存管理',
-        url: '/stocks'
+        url: '/stocks',
+        onlyAdmin: false
       },
       {
         title: '用户管理',
-        url: '/users'
+        url: '/users',
+        onlyAdmin: true
       },
       {
         title: '邀请码管理',
-        url: '/invite'
+        url: '/invite',
+        onlyAdmin: true
       },
       {
         title: '修改密码',
-        url: '/profile'
+        url: '/profile',
+        onlyAdmin: false
       },
     ]
 

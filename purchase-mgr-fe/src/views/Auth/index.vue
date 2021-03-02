@@ -5,7 +5,7 @@
     <!-- 标题 -->
     <div class="title-info">
       <img src="@/assets/img/logo.png" alt="">
-      <div class="title">采购管理系统 后台</div>
+      <div class="title">采购管理系统</div>
     </div>
 
     <!-- 表单 -->
@@ -52,6 +52,10 @@
 
           <div class="item">
             <a-input-password size="large"  placeholder="确认密码" v-model:value="regForm.subPwd" />
+          </div>
+
+          <div class="item">
+            <a-input-password size="large"  placeholder="密钥" v-model:value="regForm.key" />
           </div>
 
           <div class="item">

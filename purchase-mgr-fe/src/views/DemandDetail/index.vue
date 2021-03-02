@@ -5,13 +5,15 @@
       <a-card class="hover-card wrapper">
         <space-between>
           <h2>需求详情</h2>
-          <div class="actions">
+          <div class="actions" v-only-admin>
             <a-button type="primary"
-            @click="showUpdate = true">
+            @click="showUpdate = true"
+            >
               编辑
             </a-button>
             &nbsp;
-            <a-button type="danger" @click="removeDemand">
+            <a-button type="danger" @click="removeDemand"
+            >
               删除
             </a-button>
           </div>
@@ -94,8 +96,9 @@
                   详情
               </a>
               <a href="javascript:;"
-                  class="btn btn-danger btn-sm"
-                  @click="removeOrder(data.text)"
+                class="btn btn-danger btn-sm"
+                @click="removeOrder(data.text)"
+                v-over-buyer
               >
                   删除
               </a>
@@ -119,6 +122,7 @@
       v-model:isShow="showUpdate" 
       :info="d" 
       @updateList="getData(id)"
+      v-only-admin
     />
   </div>
 </template>

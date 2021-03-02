@@ -26,6 +26,13 @@
               class="input-el" 
             />
           </div>
+          <div class="item">
+            <span>密钥：</span>
+            <a-input-password size="large"
+              v-model:value="key"
+              class="input-el" 
+            />
+          </div>
         </div>
         <a-button 
           size="large" 

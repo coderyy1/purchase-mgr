@@ -12,7 +12,8 @@ const router = new Router({
 router.post('/update/password', async (ctx) => {
   const {
     newPassword,
-    oldPassword
+    oldPassword,
+    key
   } = ctx.request.body;
 
   const payload = await verify(getToken(ctx));
@@ -35,6 +36,14 @@ router.post('/update/password', async (ctx) => {
     ctx.body = {
       code: 0,
       msg: '密码错误'
+    }
+
+    return;
+  }
+  if(key !== user.key) {
+    ctx.body = {
+      code: 0,
+      msg: '密钥错误'
     }
 
     return;

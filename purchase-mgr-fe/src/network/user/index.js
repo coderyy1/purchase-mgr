@@ -19,11 +19,14 @@ export const add = (data) => {
   return post('/user/add', data);
 };
 
-// 重置密码的请求
-export const resetPwd = (id) => {
-  return post('/user/reset/password', {
-    id
-  });
+// 重置密码的请求(用户)
+export const resetPwd = (data) => {
+  return post('/user/reset/password', data);
+};
+
+// 重置密码的请求(管理员)
+export const resetPwdAdmin = (data) => {
+  return post('/user/reset/passwordAdmin', data);
 };
 
 // 修改用户角色的请求

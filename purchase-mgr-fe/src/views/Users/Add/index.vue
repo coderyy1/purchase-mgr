@@ -30,6 +30,9 @@
             </a-select-option>
           </a-select>
         </a-form-item>
+        <a-form-item label="密钥">
+          <a-input v-model:value="addForm.key" allowClear/>
+        </a-form-item>
       </a-form>
     </a-modal>
   </div>

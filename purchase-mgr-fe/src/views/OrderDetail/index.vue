@@ -5,7 +5,7 @@
       <a-card class="hover-card wrapper">
         <space-between>
           <h2>订单详情</h2>
-          <div class="actions">
+          <div class="actions" v-over-buyer>
             <a-button type="primary"
             @click="showUpdate = true">
               编辑
@@ -71,6 +71,7 @@
       :info="o" 
       @updateList="getData(id)"
       :supplier="supplierInfo"
+      v-over-buyer
     />
   </div>
 </template>

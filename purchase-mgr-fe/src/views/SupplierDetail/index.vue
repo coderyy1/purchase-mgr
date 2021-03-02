@@ -5,7 +5,7 @@
       <a-card class="hover-card wrapper">
         <space-between>
           <h2>供应商详情</h2>
-          <div class="actions">
+          <div class="actions" v-only-admin>
             <a-button type="primary"
             @click="addGoods"
             >
@@ -67,7 +67,7 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
-          <template #actions="data">
+          <template #actions="data" >
             <space-between>
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
@@ -101,6 +101,7 @@
       v-model:isShow="showUpdate" 
       :info="s" 
       @updateList="getData(id)"
+      v-only-admin
     />
 
     <!-- 修改供货信息的modal -->
@@ -108,6 +109,7 @@
       v-model:isShow="showUpdateGoods"
       :info="currentGoodsInfo" 
       @updateList="getGoodsList"
+      v-only-admin
     />
 
     <!-- 添加供货信息的modal -->
@@ -115,6 +117,7 @@
       v-model:isShow="showAdd"
       @updateList="getGoodsList"
       :id="id"
+      v-only-admin
     />
   </div>
 </template>

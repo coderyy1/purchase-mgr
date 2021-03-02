@@ -5,7 +5,7 @@
       <a-card class="hover-card card-wrapper">
         <space-between>
           <h2>{{ s.name }}</h2>
-          <div class="actions" >
+          <div class="actions" v-over-storeman>
             <a-button type="primary"
             @click="showUpdate = true">
               编辑
@@ -117,6 +117,7 @@
       v-model:isShow="showUpdate" 
       :info="s" 
       @updateList="getData"
+      v-over-storeman
     />
   </div>
 </template>

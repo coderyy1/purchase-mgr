@@ -27,7 +27,8 @@
             </div>
             <!-- 添加需求按钮  -->
             <div>
-              <a-button @click="showAdd = true" >
+              <a-button @click="showAdd = true" 
+              v-only-admin>
                 添加供应商
               </a-button>
             </div>
@@ -55,12 +56,14 @@
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateSupplier(data.text)"
+                v-only-admin
               >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="removeSupplier(data.text)"
+                v-only-admin
               >
                 删除
               </a>
@@ -84,6 +87,7 @@
     <add 
       v-model:isShow="showAdd"
       @updateList="updateList"
+      v-only-admin
     />
 
     <!-- 修改的modal -->
@@ -91,6 +95,7 @@
       v-model:isShow="showUpdate" 
       :info="currentInfo"
       @updateList="updateList"
+      v-only-admin
     />
   </div>
 </template>

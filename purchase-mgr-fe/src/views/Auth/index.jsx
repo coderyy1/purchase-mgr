@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref } from 'vue';
 import { UserOutlined, DisconnectOutlined, LockOutlined } from '@ant-design/icons-vue';
-import { auth } from '@/network';
+import { auth, user } from '@/network';
 import { message, Modal, Input } from 'ant-design-vue';
 import { result } from '../../helpers/utils/index';
 import store from '@/store';
@@ -20,7 +20,8 @@ export default defineComponent({
       account: '',
       password: '',
       subPwd: '',
-      inviteCode: ''
+      inviteCode: '',
+      key: ''
     });
 
     const router = useRouter();
@@ -58,12 +59,17 @@ export default defineComponent({
         return;
       }
 
+      if(regForm.key === '') {
+        message.info('请输入用于验证的密钥');
+        return;
+      }
+
       if(regForm.inviteCode === '') {
         message.error('请输入邀请码');
         return;
       }
 
-      const res = await auth.register(regForm.account, regForm.password, regForm.inviteCode);
+      const res = await auth.register(regForm.account, regForm.password, regForm.inviteCode, regForm.key);
 
       result(res)
         .success((data) => {
@@ -115,26 +121,28 @@ export default defineComponent({
     // 忘记密码的方法
     const resetPwd = () => {
       Modal.confirm({
-        title: '请输入要重置密码的账号。',
+        title: '请输入要重置密码的账号和密钥。',
         okText: '确认',
         cancelText: '取消',
         content: (
           <div>
-            <Input class="__book_input_count" />
+            <Input placeholder="账号" class="__pwd_reset_account" style="margin-bottom: 12px" /><br/>
+            <Input type="password" placeholder="密钥" class="__pwd_reset_key" />
           </div>
         ),
         onOk: async () => {
-          // const el = document.querySelector('.__book_input_count');
+          const elAccount = document.querySelector('.__pwd_reset_account');
 
-          // const res = await reset.add({
-          //   account: el.value
-          // });
-          // result(res)
-          //   .success(() => {
-          //     message.success('申请成功');
-          //   });
+          const elKey = document.querySelector('.__pwd_reset_key');
 
-          console.log('请求成功');
+          const res = await user.resetPwd({
+            account: elAccount.value,
+            key: elKey.value
+          });
+          result(res)
+            .success((data) => {
+              message.success(data.msg);
+            });
         }
 
       });

@@ -93,7 +93,8 @@ router.post('/add', async (ctx) => {
   const {
     account,
     password,
-    character
+    character,
+    key
   } = ctx.request.body;
 
   // 校验
@@ -142,7 +143,8 @@ router.post('/add', async (ctx) => {
   const user = new User({
     account,
     password,
-    character
+    character,
+    key
   });
 
   const res = await user.save();
@@ -154,8 +156,43 @@ router.post('/add', async (ctx) => {
   };
 });
 
-// 重置密码的接口-----------------------------------------------------------------------------------------
+// 重置密码的接口 (用户)------------------------------------------------------------------------------------------
 router.post('/reset/password', async (ctx) => {
+  const {
+    account,
+    key
+  } = ctx.request.body;
+
+  const one = await User.findOne({
+    account,
+    key
+  }).exec();
+
+  if(!one) {
+    ctx.body = {
+      code: 0,
+      msg: '用户不存在或者密钥错误',
+      data: null
+    };
+
+    return;
+  }
+
+  one.password = config.DEFAULT_PASSWORD;
+  const res = await one.save();
+
+  ctx.body = {
+    code: 1,
+    msg: '密码重置成功',
+    data: {
+      account: res.account,
+      _id: res._id
+    }
+  };
+});
+
+// 重置密码的接口 (管理员)------------------------------------------------------------------------------------------
+router.post('/reset/passwordAdmin', async (ctx) => {
   const {
     id
   } = ctx.request.body;
@@ -167,7 +204,7 @@ router.post('/reset/password', async (ctx) => {
   if(!one) {
     ctx.body = {
       code: 0,
-      msg: '未找到该用户',
+      msg: '用户不存在',
       data: null
     };
 

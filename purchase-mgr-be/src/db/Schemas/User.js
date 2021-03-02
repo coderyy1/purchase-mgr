@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Character'
   },
+  key: String,
 
   meta: getMeta()
 });

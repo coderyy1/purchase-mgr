@@ -7,11 +7,12 @@
       mode="inline"
       v-for="item of menu"
       :key="item.url"
+      v-only-admin="item.onlyAdmin"
     >
       <!-- 一级目录items -->
       <a-menu-item 
         @click="to(item.url)"
-        :key="item.url" 
+        :key="item.url"
       >
         {{item.title}}
       </a-menu-item>

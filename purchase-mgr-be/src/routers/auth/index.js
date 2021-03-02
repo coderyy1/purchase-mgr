@@ -17,11 +17,12 @@ router.post('/register', async (ctx) => {
   const {
     account,
     password,
-    inviteCode
+    inviteCode,
+    key = ''
   } = ctx.request.body;
 
   // 数据校验
-  if(account === '' || password === '' || inviteCode === '') {
+  if(account === '' || password === '' || inviteCode === '' || key === '') {
     ctx.body = {
       code : 0,
       msg: '字段不能为空',
@@ -90,7 +91,8 @@ router.post('/register', async (ctx) => {
   const user = new User({
     account,
     password,
-    character: characterOne._id
+    character: characterOne._id,
+    key
   });
 
   // 成功保存到数据库后设定邀请码对应的user

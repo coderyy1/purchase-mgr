@@ -193,6 +193,13 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
+  if(to.path === '/users' || to.path === '/invite') {
+    if(store.state.userCharacter.name !== 'admin') {
+      next('/demands');
+      return;
+    }
+  }
+
   next();
 });
 

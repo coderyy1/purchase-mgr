@@ -41,7 +41,10 @@
             </div>
             <!-- 添加需求按钮  -->
             <div>
-              <a-button @click="showAdd = true" >
+              <a-button 
+                @click="showAdd = true" 
+                v-only-admin
+              >
                 发布采购需求
               </a-button>
             </div>
@@ -86,6 +89,7 @@
                 class="btn btn-success btn-sm"
                 v-if="data.text.state === 1"
                 @click="finishDemand(data.text)"
+                v-over-buyer
               >
                 提交订单
               </a>
@@ -93,18 +97,21 @@
                 class="btn btn-success btn-sm"
                 disabled="disabled"
                 v-else
+                v-over-buyer
               >
                 订单已完成
               </button>
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateDemand(data.text)"
+                v-only-admin
               >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="removeDemand(data.text)"
+                v-only-admin
               >
                 删除
               </a>
@@ -128,6 +135,7 @@
     <add 
       v-model:isShow="showAdd"
       @updateList="updateList"
+      v-only-admin
     />
 
     <!-- 完成订单的modal -->
@@ -136,6 +144,7 @@
       @updateList="updateList"
       :info="currentDemandInfo"
       :supplier="supplierInfo"
+      v-over-buyer
     />
 
     <!-- 修改的modal -->
@@ -143,6 +152,7 @@
       v-model:isShow="showUpdate" 
       :info="currentDemandInfo"
       @updateList="updateList"
+      v-only-admin
     />
   </div>
 </template>

@@ -3,6 +3,7 @@ import Nav from '../Nav/index.vue';
 import { setToken } from '@/helpers/token';
 import { useStore } from 'vuex';
 import { Modal, message } from 'ant-design-vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   components: {
@@ -10,6 +11,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
 
     const logout = () => {
       Modal.confirm({
@@ -19,13 +21,13 @@ export default defineComponent({
         onOk: () => {
           setToken('');
 
-          window.location.href = '/';
+          router.replace('/auth');
         }
       });
     }
 
     const goHome = () => {
-      window.location.href = '/';
+      router.replace('/demands');
     }
 
 

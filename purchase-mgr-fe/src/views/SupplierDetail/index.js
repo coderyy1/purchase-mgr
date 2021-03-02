@@ -6,6 +6,7 @@ import { message, Modal } from 'ant-design-vue';
 import Update from '../SupplierList/Update/index.vue';
 import Add from './Add/index.vue';
 import UpdateGoods from './UpdateGoods/index.vue';
+import store from '@/store';
 
 export default defineComponent({
   components: {
@@ -25,14 +26,20 @@ export default defineComponent({
         title: '报价(每个)',
         dataIndex: 'price',
       },
-      {
-        title: '操作',
-        slots: {
-          customRender: 'actions'
-        },
-        width: '160px'
-      }
+      
     ]
+
+    if(store.state.userCharacter.name === 'admin') {
+      column.push(
+        {
+          title: '操作',
+          slots: {
+            customRender: 'actions'
+          },
+          width: '160px'
+        }
+      );
+    }
 
     const list = ref([]);
 

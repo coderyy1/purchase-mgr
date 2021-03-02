@@ -7,6 +7,18 @@ export const isAdmin = () => {
   return uc.name === 'admin';
 }
 
+export const overBuyer = () => {
+  const uc = store.state.userCharacter;
+
+  return (uc.name === 'admin' || uc.name === 'buyer');
+}
+
+export const overStoreman = () => {
+  const uc = store.state.userCharacter;
+
+  return (uc.name === 'admin' || uc.name === 'storeman');
+}
+
 export const getCharacterInfoById = (id) => {
   const { characterInfo } = store.state;
 

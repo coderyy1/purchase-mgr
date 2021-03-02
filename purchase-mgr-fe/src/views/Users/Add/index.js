@@ -7,7 +7,8 @@ import store from '@/store';
 const defaultFormData = {
   account: '',
   password: '',
-  character: ''
+  character: '',
+  key: ''
 };
 
 export default defineComponent({
@@ -38,6 +39,11 @@ export default defineComponent({
       }
       if(addForm.password.length < 6 || addForm.password.length > 12) {
         message.error('密码为6~12位');
+
+        return;
+      }
+      if(addForm.key === '') {
+        message.error('请输入密钥');
 
         return;
       }

@@ -28,7 +28,7 @@
             </div>
             <!-- 添加按钮  -->
             <div>
-              <a-button @click="showAdd = true" >
+              <a-button @click="showAdd = true" v-over-storeman>
                 添加库存货物
               </a-button>
             </div>
@@ -61,13 +61,15 @@
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateStock(data.text)"
-                >
+                v-over-storeman
+              >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="removeStock(data.text)"
-                >
+                v-over-storeman
+              >
                 删除
               </a>
             </space-between>
@@ -75,9 +77,9 @@
 
           <template #count="data">
             <space-between>
-              <a href="javascript:;" @click="editCount('OUT_COUNT', data.text)" >出库</a>
+              <a href="javascript:;" @click="editCount('OUT_COUNT', data.text)" v-over-storeman>出库</a>
               {{ data.text.count }}
-              <a href="javascript:;" @click="editCount('IN_COUNT', data.text)" >入库</a>
+              <a href="javascript:;" @click="editCount('IN_COUNT', data.text)" v-over-storeman>入库</a>
             </space-between>
           </template>
         </a-table>
@@ -98,6 +100,7 @@
     <add 
       v-model:isShow="showAdd"
       @updateList="getList" 
+      v-over-storeman
     />
 
     <!-- 修改的modal -->
@@ -105,6 +108,7 @@
       v-model:isShow="showUpdate" 
       :info="currentInof"
       @updateList="getList"
+      v-over-storeman
     />
   </div>
 </template>

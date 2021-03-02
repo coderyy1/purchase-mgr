@@ -3,12 +3,16 @@ import { profile } from '@/network';
 import { message } from 'ant-design-vue';
 import { result } from '@/helpers/utils';
 import { setToken } from '@/helpers/token';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
     const oldPwd = ref('');
     const newPwd = ref('');
     const submiPwd = ref('');
+    const key = ref('');
+
+    const router = useRouter();
 
     const updatePwd = async () => {
       // 校验
@@ -28,18 +32,24 @@ export default defineComponent({
         message.error('两次输入的密码不一致');
         return;
       }
+      if(key.value === '') {
+        message.error('请输入密钥');
+        return;
+      }
 
 
       // 请求
       const res = await profile.update({
         newPassword: newPwd.value,
-        oldPassword: oldPwd.value
+        oldPassword: oldPwd.value,
+        key: key.value
       });
       result(res)
         .success( async (data) => {
           oldPwd.value = '';
           newPwd.value = '';
           submiPwd.value = '';
+          key.value = '';
           await message.success(`修改成功，即将登出。`);
           logout();
         });
@@ -48,13 +58,14 @@ export default defineComponent({
     // 登出
     const logout = () => {
       setToken('');
-      window.location.href = '/';
+      router.replace('/auth');
     }
 
     return {
       oldPwd,
       newPwd,
       submiPwd,
+      key,
 
       updatePwd,
       logout
