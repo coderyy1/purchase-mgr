@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store';
 import { message } from 'ant-design-vue';
 import { getToken } from '@/helpers/token/index';
+import { user } from '@/network';
 
 const routes = [
   // 登陆界面
@@ -170,9 +171,27 @@ router.beforeEach(async (to, from, next) => {
 
   // 登陆拦截
   if(to.path !== '/auth') {
-    if(!getToken()) {
-      next('/auth');
+    // if(!getToken()) {
+    //   next('/auth');
+    //   message.error('认证失败，请重新登录');
+    //   return;
+    // }
+    
+    let res = {};
+
+    try {
+      res = await user.info();
+    } catch (e) {
+      if (e.message.includes('code 401')) {
+        res.code = 401;
+      }
+    }
+
+    const { code } = res;
+
+    if (code === 401) {
       message.error('认证失败，请重新登录');
+      next('/auth');
       return;
     }
   }

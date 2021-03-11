@@ -2,7 +2,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const { connect } = require('./db');
 const registerRoutes = require('./routers');
-// const { middleware: koaJwtMiddleware } = require('./helpers/token');
+const { middleware: koaJwtMiddleware, checkUser, catchTokenError } = require('./helpers/token');
 const cors = require('@koa/cors')
 
 
@@ -13,7 +13,10 @@ connect().then(() => {
   // 解决跨域
   app.use(cors());
   app.use(koaBody());
-  // koaJwtMiddleware(app);
+  app.use(catchTokenError);
+  // 检查jwt的中间件
+  koaJwtMiddleware(app);
+  app.use(checkUser);
   // 注册路由
   registerRoutes(app);
 
