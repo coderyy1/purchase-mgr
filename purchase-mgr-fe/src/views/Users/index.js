@@ -34,7 +34,8 @@ export default defineComponent({
         title: '操作',
         slots: {
           customRender: 'actions'
-        }
+        },
+        width: '220px'
       }
     ];
 

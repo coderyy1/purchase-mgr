@@ -44,7 +44,7 @@ export default defineComponent({
         onlyAdmin: true
       },
       {
-        title: '修改密码',
+        title: '我的档案',
         url: '/profile',
         onlyAdmin: false
       },

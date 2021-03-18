@@ -6,7 +6,8 @@ export const regDirectives = (app) => {
       const res = isAdmin();
 
       if(!res && value) {
-        el.style.display = 'none';
+        // el.style.display = 'none';
+        el.parentNode && el.parentNode.removeChild(el);
       }
     }
   });
@@ -18,7 +19,8 @@ export const buyerDirectives = (app) => {
       const res = overBuyer();
 
       if(!res && value) {
-        el.style.display = 'none';
+        // el.style.display = 'none';
+        el.parentNode && el.parentNode.removeChild(el);
       }
     }
   });
@@ -30,7 +32,8 @@ export const storemanDirectives = (app) => {
       const res = overStoreman();
 
       if(!res && value) {
-        el.style.display = 'none';
+        // el.style.display = 'none';
+        el.parentNode && el.parentNode.removeChild(el);
       }
     }
   });

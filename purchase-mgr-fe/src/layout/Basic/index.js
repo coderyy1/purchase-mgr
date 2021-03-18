@@ -30,11 +30,16 @@ export default defineComponent({
       router.replace('/demands');
     }
 
+    const goProfile = () => {
+      router.replace('/profile')
+    }
+
 
     return {
       store,
       logout,
-      goHome
+      goHome,
+      goProfile
     }
   }
 });
