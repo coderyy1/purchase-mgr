@@ -1,0 +1,38 @@
+.total-info {
+  margin-bottom: 24px;
+  .num {
+    font-size: 24px;
+  }
+  .des {
+    color: blue;
+    font-size: 20px;
+  }
+}
+
+.total-list {
+  display: flex;
+  .total-item {
+    flex: 1;
+  }
+}
+
+
+.table-car {
+  .t-wrapper {
+    position: relative;
+    justify-content: space-around;
+    display: flex;
+    .t-left {
+      width: 500px;
+      height: 300px;
+      // background-color: #f00;
+      // border: 1px solid #ccc;
+    }
+    .t-right {
+      width: 500px;
+      height: 300px;
+      // background-color: #0f0;
+      // border: 1px solid #ccc;
+    }
+  }
+}

@@ -21,9 +21,9 @@ export default {
     min-width: 1200px;
   }
 
-  .hover-card {
-    &:hover {
-      box-shadow: 0 0 7px 0 rgba(100, 100, 100, .3);
-    }
-  }
+
+
+    
+
+
 </style>

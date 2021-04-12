@@ -86,13 +86,23 @@
       top: 64px;
       bottom: 0;
       background-color: #fff;
+      box-shadow: 2px 2px 9px 2px #f0f1f2;
       z-index: 1;
+      &:hover {
+        box-shadow: 0 0 7px 0 rgba(100, 100, 100, .3);
+      }
     }
 
     .right {
       // flex: 1;
       padding: 24px;
       margin-left: 256px;
+      :deep(.ant-card-bordered) {
+        border: 1px solid #eee;
+        &:hover {
+          box-shadow: 0 0 7px 0 rgba(100, 100, 100, .3);
+        }
+      }
     }
   }
 }

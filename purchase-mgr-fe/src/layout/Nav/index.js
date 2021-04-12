@@ -9,6 +9,11 @@ export default defineComponent({
 
     const menu = [
       {
+        title: '总览',
+        url: '/home',
+        onlyAdmin: false
+      },
+      {
         title: '需求列表',
         url: '/demands',
         onlyAdmin: false
@@ -48,6 +53,7 @@ export default defineComponent({
         url: '/profile',
         onlyAdmin: false
       },
+      
     ]
 
 

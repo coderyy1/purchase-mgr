@@ -150,6 +150,17 @@ const routes = [
           navUrl: '/profile'
         },
         component: () => import(/* webpackChunkName: "Profile" */'../views/Profile/index.vue')
+      },
+
+      // 默认界面
+      {
+        path: '/home',
+        name: 'Home',
+        meta: {
+          title: '',
+          navUrl: '/home'
+        },
+        component: () => import(/* webpackChunkName: "Profile" */'../views/Home/index.vue')
       }
     ]
   }
@@ -200,7 +211,7 @@ router.beforeEach(async (to, from, next) => {
 
   // 不能访问登陆页
   if(to.path === '/auth' && getToken()) {
-      next('/demands');
+      next('/home');
       return;
   }
 
@@ -214,7 +225,7 @@ router.beforeEach(async (to, from, next) => {
 
   if(to.path === '/users' || to.path === '/invite') {
     if(store.state.userCharacter.name !== 'admin') {
-      next('/demands');
+      next('/home');
       return;
     }
   }

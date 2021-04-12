@@ -9,6 +9,7 @@ const countLog = require('./count-log/index');
 const character = require('./character/index');
 const user = require('./user/index');
 const profile = require('./profile/index');
+const home = require('./home/index');
 
 
 module.exports = (app) => {
@@ -23,4 +24,5 @@ module.exports = (app) => {
   app.use(character.routes());
   app.use(user.routes());
   app.use(profile.routes());
+  app.use(home.routes());
 };
