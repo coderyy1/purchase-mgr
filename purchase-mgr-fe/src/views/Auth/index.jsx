@@ -114,7 +114,7 @@ export default defineComponent({
           // 更新axios请求头内容
           axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
 
-          router.replace('/demands')
+          router.replace('/home')
         });
     }
 

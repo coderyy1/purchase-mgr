@@ -103,6 +103,19 @@
           box-shadow: 0 0 7px 0 rgba(100, 100, 100, .3);
         }
       }
+      // :deep(.ant-table-thead) {
+      //   th {
+      //     text-align: center;
+      //   }
+      // }
+      // :deep(.ant-table-row) {
+      //   td {
+      //     text-align: center;
+      //   }
+      // }
+      :deep(.ant-table-header-column) {
+        font-size: 20px;
+      }
     }
   }
 }

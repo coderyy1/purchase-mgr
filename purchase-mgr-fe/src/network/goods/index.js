@@ -25,3 +25,8 @@ export const list = (data) => {
   return get('/goods/list', data);
 }
 
+// 获取目标货物的提供商的请求
+export const finSuppliers = (data) => {
+  return get('/goods/finSuppliers', data)
+}
+

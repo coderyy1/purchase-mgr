@@ -85,22 +85,32 @@
               >
                 详情
               </a>
-              <a href="javascript:;" 
-                class="btn btn-success btn-sm"
-                v-if="data.text.state === 1"
-                @click="finishDemand(data.text)"
-                v-over-buyer
-              >
-                提交订单
-              </a>
               <button
-                class="btn btn-success btn-sm"
+                class="btn btn-warning btn-sm"
                 disabled="disabled"
-                v-else
+                v-if="data.text.endTime < ((new Date()).valueOf())"
                 v-over-buyer
               >
-                订单已完成
+                需求已过期
               </button>
+              <div v-else>
+                <a href="javascript:;" 
+                  class="btn btn-success btn-sm"
+                  v-if="data.text.state === 1"
+                  @click="finishDemand(data.text)"
+                  v-over-buyer
+                >
+                  提交订单
+                </a>
+                <button
+                  class="btn btn-success btn-sm"
+                  disabled="disabled"
+                  v-else
+                  v-over-buyer
+                >
+                  需求已完成
+                </button>
+              </div>
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateDemand(data.text)"
@@ -143,7 +153,6 @@
       v-model:isShow="showFinish"
       @updateList="updateList"
       :info="currentDemandInfo"
-      :supplier="supplierInfo"
       v-over-buyer
     />
 

@@ -1,5 +1,5 @@
 import { defineComponent, reactive, watch, ref } from 'vue';
-import { demand, order } from '@/network/index';
+import { demand, order, goods } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
 import store from '@/store';
@@ -15,18 +15,32 @@ const defaultFormData = {
 export default defineComponent({
   props: {
     isShow: Boolean,
-    info: Object,
-    supplier: Array
+    info: Object
   },
   setup(props, context) {
     const addForm = reactive(clone(defaultFormData));
     const maxCount = ref(99999999);
 
-    watch(() => props.info, (current) => {
+    const supplierList = ref([]);
+
+    // 获取供应商list
+    const getSupplierList = async () => {
+      const res = await goods.finSuppliers({name: props.info.name})
+      result(res)
+        .success(({data}) => {
+          supplierList.value = data
+        })
+    }
+
+    watch(() => props.info, async (current) => {
       addForm.id = props.info._id;
       addForm.name = props.info.name;
+      addForm.supplier = ''
       maxCount.value = props.info.num;
+      await getSupplierList()
     });
+
+
 
     const submit = async () => {
 
@@ -83,7 +97,8 @@ export default defineComponent({
       maxCount,
       submit,
       props,
-      close
+      close,
+      supplierList
     }
   }
 });

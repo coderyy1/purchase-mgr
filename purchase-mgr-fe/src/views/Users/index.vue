@@ -3,7 +3,7 @@
     <a-spin :spinning="loading">
       <a-card>
         <div class="title">
-          <h3>用户管理</h3>
+          <h2>用户管理</h2>
         </div>
         <a-divider />
         <div class="actions">

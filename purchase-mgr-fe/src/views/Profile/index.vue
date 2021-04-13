@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card >
+    <a-card class="profile-card">
       <h2>修改密码</h2>
       <a-divider />
       <div class="input-wrapper">

@@ -21,7 +21,7 @@ connect().then(() => {
   registerRoutes(app);
 
   app.listen(3000, () => {
-    console.log('启动成功!');
+    console.log('启动成功!,服务器运行在3000端口');
   });
 })
 

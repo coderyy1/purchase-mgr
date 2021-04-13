@@ -231,4 +231,32 @@ router.post('/update', async (ctx) => {
 
 });
 
+// 获取目标货物的提供商的接口
+router.get('/finSuppliers', async (ctx) => {
+
+  const { name } = ctx.query;
+  const res = await Goods.find({
+    name
+  })
+  .populate({
+    path: 'supplier',
+    select: {
+      _id: 1,
+      name: 1
+    }
+  })
+  .exec();
+
+  const data = res.map((resObj) => {
+    return {_id: resObj.supplier._id, name: resObj.supplier.name}
+  });
+
+  ctx.body = {
+    code: 1,
+    msg: '获取成功',
+    data
+  }
+
+});
+
 module.exports = router;

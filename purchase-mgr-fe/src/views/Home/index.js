@@ -63,7 +63,8 @@ export default defineComponent({
                         {value: data.unFinish, name: '未完成'},
                     ],
                     label: {
-                      position: 'inside'
+                      position: 'inside',
+                      formatter: '{b}({d}%)'
                       },
                       labelLine: {
                           show: false
@@ -113,7 +114,8 @@ export default defineComponent({
                           {value: data.storemanNum, name: '仓库人员'},
                       ],
                       label: {
-                        position: 'inside'
+                        position: 'inside',
+                        formatter: '{b}({d}%)'
                         },
                         labelLine: {
                             show: false

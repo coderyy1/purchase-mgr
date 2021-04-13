@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card>
+    <a-card class="invite-card">
       <space-between >
         <h2>邀请码列表</h2>
         <div class="add">

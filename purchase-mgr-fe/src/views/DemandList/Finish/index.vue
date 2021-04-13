@@ -26,7 +26,7 @@
             style="width: 220px;"
           >
             <a-select-option 
-              v-for="(item, index) of props.supplier"
+              v-for="(item, index) of supplierList"
               :key="index"
               :value="item._id"
             >
