@@ -6,6 +6,8 @@ const Character = mongoose.model('Character');
 const Demand = mongoose.model('Demand');
 const Supplier = mongoose.model('Supplier');
 const Goods = mongoose.model('Goods');
+const Order = mongoose.model('Order');
+const Stock = mongoose.model('Stock');
 
 
 const router = new Router({
@@ -59,7 +61,7 @@ router.get('/demandFinish', async (ctx) => {
 
 });
 
-// 用户情况的接口
+// 用户情况的接口----------------------------------------------------------------------------------------------
 router.get('/userCharact', async (ctx) => {
 
   const memberNum = await User
@@ -102,6 +104,59 @@ router.get('/userCharact', async (ctx) => {
       adminNum,
       buyerNum,
       storemanNum
+    }
+  }
+});
+
+
+//获取当日新增的接口
+router.get('/todayNew', async (ctx) => {
+  // 需求
+  const newDemands = await Demand
+  //#region 
+    .where('meta.createdAt')
+    .gt(Number(new Date(new Date().toLocaleDateString()).getTime()))
+    .countDocuments()
+    .exec();
+  //#endregion
+
+  // 订单
+  const newOrders = await Order
+    .where('meta.createdAt')
+    .gt(Number(new Date(new Date().toLocaleDateString()).getTime()))
+    .countDocuments()
+    .exec();
+
+  // 供应商
+  const newSuppliers = await Supplier
+    .where('meta.createdAt')
+    .gt(Number(new Date(new Date().toLocaleDateString()).getTime()))
+    .countDocuments()
+    .exec();
+
+  // 商品
+  const newGoods = await Goods
+    .where('meta.createdAt')
+    .gt(Number(new Date(new Date().toLocaleDateString()).getTime()))
+    .countDocuments()
+    .exec();
+
+  // 库存货物
+  const newStocks = await Stock
+    .where('meta.createdAt')
+    .gt(Number(new Date(new Date().toLocaleDateString()).getTime()))
+    .countDocuments()
+    .exec();
+  
+  ctx.body = {
+    code: 1,
+    msg: '获取成功',
+    data: {
+      newDemands,
+      newOrders,
+      newSuppliers,
+      newGoods,
+      newStocks
     }
   }
 });

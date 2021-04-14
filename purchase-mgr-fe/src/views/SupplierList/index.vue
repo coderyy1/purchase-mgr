@@ -1,41 +1,41 @@
 <template>
   <div class="wrapper">
-    <a-spin :spinning="false">
-      <a-card 
-        :title="simple ? '最近添加的供应商' : ''"
-      >
-        <div v-if="!simple">
-          <!-- 标题 -->
-          <h2 class="title">供应商列表</h2>
-          <a-divider />
-          <!-- 搜索框 -->
-          <space-between>
-            <div class="search-wrapper">
-              <a-input-search
-                class="search"
-                placeholder="根据名称搜索"
-                v-model:value="keyword"
-                enter-button
-                @search="search"
-              />
-              <a href="javascript:;"
-                @click="back"
-                v-if="showBack"
-              >
-                返回
-              </a>
-            </div>
-            <!-- 添加需求按钮  -->
-            <div>
-              <a-button @click="showAdd = true" 
-              v-only-admin>
-                添加供应商
-              </a-button>
-            </div>
-          </space-between>
-          <a-divider />
-        </div>
-        <!-- 表格 -->
+    <a-card 
+      :title="simple ? '最近添加的供应商' : ''"
+    >
+      <div v-if="!simple">
+        <!-- 标题 -->
+        <h2 class="title">供应商列表</h2>
+        <a-divider />
+        <!-- 搜索框 -->
+        <space-between>
+          <div class="search-wrapper">
+            <a-input-search
+              class="search"
+              placeholder="根据名称搜索"
+              v-model:value="keyword"
+              enter-button
+              @search="search"
+            />
+            <a href="javascript:;"
+              @click="back"
+              v-if="showBack"
+            >
+              返回
+            </a>
+          </div>
+          <!-- 添加需求按钮  -->
+          <div>
+            <a-button @click="showAdd = true" 
+            v-only-admin>
+              添加供应商
+            </a-button>
+          </div>
+        </space-between>
+        <a-divider />
+      </div>
+      <!-- 表格 -->
+      <a-spin :spinning="loading">
         <a-table 
           rowKey="_id" 
           :columns="column" 
@@ -80,8 +80,8 @@
             @change="setPage"
           />
         </space-between>
-      </a-card>
-    </a-spin>
+      </a-spin>
+    </a-card>
 
     <!-- 添加的modal -->
     <add 

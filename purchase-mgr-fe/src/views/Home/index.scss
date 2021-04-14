@@ -27,12 +27,27 @@
       height: 300px;
       // background-color: #f00;
       // border: 1px solid #ccc;
+      padding: 20px 0;
     }
     .t-right {
       width: 500px;
       height: 300px;
       // background-color: #0f0;
       // border: 1px solid #ccc;
+      padding: 20px 0;
+    }
+  }
+  .b-wrapper {
+    margin-top: 44px;
+    width: 100%;
+    position: relative;
+    justify-content: space-around;
+    display: flex;
+    #today-new {
+      height: 400px;
+      width: 800px;
+      border: 1px solid #ccc;
+      padding: 20px 0;
     }
   }
 }

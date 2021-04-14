@@ -14,3 +14,8 @@ export const demandFinish = () => {
 export const userChara = () => {
   return get('/home/userCharact');
 }
+
+//获取今日新增的请求
+export const todayNew = () => {
+  return get('/home/todayNew');
+}

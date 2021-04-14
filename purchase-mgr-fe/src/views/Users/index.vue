@@ -1,37 +1,37 @@
 <template>
   <div>
-    <a-spin :spinning="loading">
-      <a-card>
-        <div class="title">
-          <h2>用户管理</h2>
-        </div>
-        <a-divider />
-        <div class="actions">
-          <space-between>
-            <div class="search-wrapper">
-              <a-input-search
-                class="search"
-                placeholder="根据用户名搜索"
-                v-model:value="keyword"
-                enter-button
-                allowClear
-                @search="search"
-              />
-              <a href="javascript:;"
-                @click="back"
-                v-if="showBack"
-              >
-                返回
-              </a>
-            </div>
-            <div class="actions-add">
-              <a-button @click="showAdd = true">
-                添加用户
-              </a-button>
-            </div>
-          </space-between>
-        </div>
-        <a-divider />
+    <a-card>
+      <div class="title">
+        <h2>用户管理</h2>
+      </div>
+      <a-divider />
+      <div class="actions">
+        <space-between>
+          <div class="search-wrapper">
+            <a-input-search
+              class="search"
+              placeholder="根据用户名搜索"
+              v-model:value="keyword"
+              enter-button
+              allowClear
+              @search="search"
+            />
+            <a href="javascript:;"
+              @click="back"
+              v-if="showBack"
+            >
+              返回
+            </a>
+          </div>
+          <div class="actions-add">
+            <a-button @click="showAdd = true">
+              添加用户
+            </a-button>
+          </div>
+        </space-between>
+      </div>
+      <a-divider />
+      <a-spin :spinning="loading">
         <a-table
           rowKey="_id" 
           :columns="column" 
@@ -75,8 +75,8 @@
             @change="setPage"
           />
         </div>
-      </a-card>
-    </a-spin>
+      </a-spin>
+    </a-card>
 
     <!-- 添加用户的modal -->
     <add 

@@ -23,9 +23,14 @@
     <!-- 图表开始 -->
     <div class="table-car">
       <a-card>
+        <!-- 前两个pie图 -->
         <div class="t-wrapper">
           <div id="demand-finish" class="t-left"></div>
           <div id="user-character" class="t-right"></div>
+        </div>
+        <!-- 第三个bar图 -->
+        <div class="b-wrapper">
+          <div id="today-new"></div>
         </div>
       </a-card>
     </div>

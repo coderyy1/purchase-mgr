@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 const { getMeta, preSave } = require('../helpers');
 
 const UserSchema = new mongoose.Schema({
-  account: String,
-  password: String,
-  character: {
+  account: String,  //用户名
+  password: String,  //密码
+  character: {  //权限
     type: Schema.Types.ObjectId,
     ref: 'Character'
   },
-  key: String,
+  key: String,  //密钥 -> 用于修改密码
 
   meta: getMeta()
 });

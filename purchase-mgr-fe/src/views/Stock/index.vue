@@ -1,41 +1,41 @@
 <template>
   <div class="wrapper">
-    <a-spin :spinning="loading">
-      <a-card 
-        :title="simple ? '仓库最近添加的货物' : ''"
-      >
-        <div v-if="!simple">
-          <!-- 标题 -->
-          <h2 class="title">仓库库存</h2>
-          <a-divider />
-          <!-- 搜索框 -->
-          <space-between>
-            <div class="search-wrapper">
-              <a-input-search
-                class="search"
-                placeholder="根据货物名称搜索"
-                v-model:value="keyword"
-                enter-button
-                allowClear
-                @search="search"
-              />
-              <a href="javascript:;"
-                @click="back"
-                v-if="showBack"
-              >
-                返回
-              </a>
-            </div>
-            <!-- 添加按钮  -->
-            <div>
-              <a-button @click="showAdd = true" v-over-storeman>
-                添加库存货物
-              </a-button>
-            </div>
-          </space-between>
-          <a-divider />
-        </div>
-        <!-- 表格 -->
+    <a-card 
+      :title="simple ? '仓库最近添加的货物' : ''"
+    >
+      <div v-if="!simple">
+        <!-- 标题 -->
+        <h2 class="title">仓库库存</h2>
+        <a-divider />
+        <!-- 搜索框 -->
+        <space-between>
+          <div class="search-wrapper">
+            <a-input-search
+              class="search"
+              placeholder="根据货物名称搜索"
+              v-model:value="keyword"
+              enter-button
+              allowClear
+              @search="search"
+            />
+            <a href="javascript:;"
+              @click="back"
+              v-if="showBack"
+            >
+              返回
+            </a>
+          </div>
+          <!-- 添加按钮  -->
+          <div>
+            <a-button @click="showAdd = true" v-over-storeman>
+              添加库存货物
+            </a-button>
+          </div>
+        </space-between>
+        <a-divider />
+      </div>
+      <!-- 表格 -->
+      <a-spin :spinning="loading">
         <a-table 
           rowKey="_id" 
           :columns="column" 
@@ -93,8 +93,8 @@
             @change="setPage"
           />
         </space-between>
-      </a-card>
-    </a-spin>
+      </a-spin>
+    </a-card>
 
     <!-- 添加的modal -->
     <add 

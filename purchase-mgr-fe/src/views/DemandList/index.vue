@@ -1,57 +1,57 @@
 <template>
   <div class="wrapper">
-    <a-spin :spinning="false">
-      <a-card 
-        :title="simple ? '最近添加的采购需求' : ''"
-      >
-        <div v-if="!simple">
-          <!-- 标题 -->
-          <h2 class="title">采购需求列表</h2>
-          <a-divider />
-          <!-- 搜索框 -->
-          <space-between>
-            <!-- 下拉选择 -->
-            <!-- <a-select
-              v-model:value="value1"
-              style="width: 60px"
-              ref="select"
+    <a-card 
+      :title="simple ? '最近添加的采购需求' : ''"
+    >
+      <div v-if="!simple">
+        <!-- 标题 -->
+        <h2 class="title">采购需求列表</h2>
+        <a-divider />
+        <!-- 搜索框 -->
+        <space-between>
+          <!-- 下拉选择 -->
+          <!-- <a-select
+            v-model:value="value1"
+            style="width: 60px"
+            ref="select"
+          >
+            <a-select-option value="jack">
+              Jack
+            </a-select-option>
+            <a-select-option value="111">
+              111
+            </a-select-option>
+          </a-select>
+          {{value1}} -->
+          <div class="search-wrapper">
+            <a-input-search
+              class="search"
+              placeholder="根据需求货物搜索"
+              v-model:value="keyword"
+              enter-button
+              @search="search"
+            />
+            <a href="javascript:;"
+              @click="back"
+              v-if="showBack"
             >
-              <a-select-option value="jack">
-                Jack
-              </a-select-option>
-              <a-select-option value="111">
-                111
-              </a-select-option>
-            </a-select>
-            {{value1}} -->
-            <div class="search-wrapper">
-              <a-input-search
-                class="search"
-                placeholder="根据需求货物搜索"
-                v-model:value="keyword"
-                enter-button
-                @search="search"
-              />
-              <a href="javascript:;"
-                @click="back"
-                v-if="showBack"
-              >
-                返回
-              </a>
-            </div>
-            <!-- 添加需求按钮  -->
-            <div>
-              <a-button 
-                @click="showAdd = true" 
-                v-only-admin
-              >
-                发布采购需求
-              </a-button>
-            </div>
-          </space-between>
-          <a-divider />
-        </div>
-        <!-- 表格 -->
+              返回
+            </a>
+          </div>
+          <!-- 添加需求按钮  -->
+          <div>
+            <a-button 
+              @click="showAdd = true" 
+              v-only-admin
+            >
+              发布采购需求
+            </a-button>
+          </div>
+        </space-between>
+        <a-divider />
+      </div>
+      <!-- 表格 -->
+      <a-spin :spinning="loading">
         <a-table 
           rowKey="_id" 
           :columns="column" 
@@ -138,8 +138,8 @@
             @change="setPage"
           />
         </space-between>
-      </a-card>
-    </a-spin>
+      </a-spin>
+    </a-card>
 
     <!-- 添加的modal -->
     <add 

@@ -24,10 +24,13 @@ export default defineComponent({
         dataIndex: 'place',
       },
       {
-        title: '报价',
-        dataIndex: 'price',
+        title: '报价(每个/每斤)',
+        // dataIndex: 'price',
         sortDirections: ['descend'],
         sorter: (a, b) => a.price - b.price,
+        slots: {
+          customRender: 'price'
+        }
       },
       {
         title: '供应商名称',
