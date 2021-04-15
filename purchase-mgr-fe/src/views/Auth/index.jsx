@@ -11,6 +11,7 @@ import axios from 'axios';
 
 
 export default defineComponent({
+  name: 'Auth',
   components: {
     UserOutlined, DisconnectOutlined, LockOutlined
   },

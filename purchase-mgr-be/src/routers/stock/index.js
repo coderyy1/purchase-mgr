@@ -17,7 +17,8 @@ const COUNT_CONST = {
 router.post('/add', async (ctx) => {
   const {
     name,
-    count
+    count,
+    storeName
   } = ctx.request.body;
 
   const one = await Stock.findOne({
@@ -26,7 +27,7 @@ router.post('/add', async (ctx) => {
   if(one) {
     ctx.body = {
       code: 0,
-      msg: '出错了'
+      msg: '已存在该商品'
     };
 
     return;
@@ -34,7 +35,8 @@ router.post('/add', async (ctx) => {
 
   const stock = new Stock({
     name,
-    count
+    count,
+    storeName
   });
 
   const res = await stock.save();

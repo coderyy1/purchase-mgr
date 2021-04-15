@@ -41,7 +41,7 @@
         >
         <!-- 报价 -->
           <template #price="data">
-            {{ `${data.text.price}  ￥` }}
+            {{ `${data.text.price}  ￥/` + (data.text.unit || '个') }}
           </template>
           <!-- 供应商 -->
           <template #supplier="data">

@@ -16,6 +16,9 @@
         <a-form-item label="报价">
           <a-input-number v-model:value="addForm.price"  :min="0" :max="999999" />
         </a-form-item>
+        <a-form-item label="报价单位">
+          <a-input v-model:value="addForm.unit" allowClear/>
+        </a-form-item>
         <a-form-item label="产地">
           <a-input v-model:value="addForm.place" allowClear/>
         </a-form-item>

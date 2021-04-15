@@ -67,6 +67,9 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
+          <template #price="data" >
+            {{ `${data.text.price}  ￥  /  ` + (data.text.unit || '个') }}
+          </template>
           <template #actions="data" >
             <space-between>
               <a href="javascript:;" 

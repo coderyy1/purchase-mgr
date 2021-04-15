@@ -16,7 +16,8 @@ router.post('/add', async (ctx) => {
     id,
     name,
     place,
-    price
+    price,
+    unit
   } = ctx.request.body;
 
   // 校验
@@ -50,6 +51,7 @@ router.post('/add', async (ctx) => {
     name,
     place,
     price,
+    unit,
     supplier: id
   });
 

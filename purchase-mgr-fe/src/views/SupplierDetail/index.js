@@ -9,6 +9,7 @@ import UpdateGoods from './UpdateGoods/index.vue';
 import store from '@/store';
 
 export default defineComponent({
+  name: 'SupplierDetail',
   components: {
     Update, Add, UpdateGoods
   },
@@ -23,8 +24,10 @@ export default defineComponent({
         dataIndex: 'place',
       },
       {
-        title: '报价(每个)',
-        dataIndex: 'price',
+        title: '报价',
+        slots: {
+          customRender: 'price'
+        },
       },
       
     ]

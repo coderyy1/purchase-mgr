@@ -4,6 +4,7 @@ import { result } from '@/helpers/utils';
 import { home } from '@/network'
 
 export default defineComponent({
+  name: 'Home',
   components: {
 
   },

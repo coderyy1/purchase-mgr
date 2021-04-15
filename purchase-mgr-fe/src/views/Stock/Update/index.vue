@@ -13,6 +13,9 @@
         <a-form-item label="货物名称">
           <a-input v-model:value="updateForm.name" allowClear/>
         </a-form-item>
+        <a-form-item label="仓库名称">
+          <a-input v-model:value="updateForm.storeName" allowClear/>
+        </a-form-item>
       </a-form>
     </a-modal>
   </div>

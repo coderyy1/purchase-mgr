@@ -6,7 +6,8 @@ import { message } from 'ant-design-vue';
 const defaultFormData = {
   name: '',
   price: 0,
-  place: ''
+  place: '',
+  unit: '个'
 };
 
 export default defineComponent({

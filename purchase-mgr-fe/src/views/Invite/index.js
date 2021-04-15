@@ -6,6 +6,7 @@ import { getCharacterInfoById } from '@/helpers/character';
 import store from '@/store';
 
 export default defineComponent({
+  name: 'Invite',
   setup() {
     const column = [
       {

@@ -6,6 +6,7 @@ import { setToken } from '@/helpers/token';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
+  name: 'Profile',
   setup() {
     const oldPwd = ref('');
     const newPwd = ref('');

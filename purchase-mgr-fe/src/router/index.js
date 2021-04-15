@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import store from '@/store';
 import { message } from 'ant-design-vue';
 import { getToken } from '@/helpers/token/index';
@@ -33,7 +33,7 @@ const routes = [
 
       // 需求详情界面
       {
-        path: '/demands/:id',
+        path: '/demands/details/:id',
         name: 'DemandDetail',
         meta: {
           title: '',
@@ -55,7 +55,7 @@ const routes = [
 
       // 订单详情界面
       {
-        path: '/orders/:id',
+        path: '/orders/details/:id',
         name: 'OrderDetail',
         meta: {
           title: '',
@@ -77,7 +77,7 @@ const routes = [
 
       // 供应商详情界面
       {
-        path: '/suppliers/:id',
+        path: '/suppliers/details/:id',
         name: 'SupplierDetail',
         meta: {
           title: '',
@@ -110,7 +110,7 @@ const routes = [
 
       // 库存详情界面
       {
-        path: '/stocks/:id',
+        path: '/stocks/details/:id',
         name: 'StocksDetail',
         meta: {
           title: '',
@@ -167,12 +167,21 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
 router.beforeEach(async (to, from, next) => {
 
+  // 目标不为详情页时，缓存清空
+  // 目标为详情页时，缓存
+  if(!to.path.includes('/details/') && !from.path.includes('/details/')) {
+    // console.log('clear');
+    store.commit('clearKeepComp')
+  } else {
+    // console.log('set');
+    store.commit('setKeepComp')
+  }
 
 
   // 获取权限列表

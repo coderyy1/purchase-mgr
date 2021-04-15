@@ -89,6 +89,10 @@ export default defineComponent({
 
     // 改变父组件传来的值
     const close = () => {
+      addForm.num = 0
+      addForm.supplier = ''
+      addForm.user = ''
+      addForm.money = 0
       context.emit('update:isShow', false);
     }
 

@@ -16,6 +16,9 @@
         <a-form-item label="库存">
           <a-input-number v-model:value="addForm.count"  :min="0" :max="999999" />
         </a-form-item>
+        <a-form-item label="仓库名称">
+           <a-input v-model:value="addForm.storeName" allowClear/>
+        </a-form-item>
       </a-form>
     </a-modal>
   </div>

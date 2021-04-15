@@ -6,6 +6,7 @@ import { message, Modal } from 'ant-design-vue';
 import Update from '../DemandList/Update/index.vue';
 
 export default defineComponent({
+  name: 'DemandDetail',
   components: {
     Update
   },
@@ -155,7 +156,7 @@ export default defineComponent({
     // 前往订单详情的方法
     const goOrderDetail = (data) => {
       router.push({
-        path: `/orders/${data._id}`
+        path: `/orders/details/${data._id}`
       });
     }
 

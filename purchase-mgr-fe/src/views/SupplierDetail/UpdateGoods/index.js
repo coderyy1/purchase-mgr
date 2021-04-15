@@ -14,7 +14,8 @@ export default defineComponent({
     const updateForm = reactive({
       name: '',
       price: 0,
-      place: ''
+      place: '',
+      unit: '个'
     });
 
 

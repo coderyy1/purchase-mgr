@@ -6,6 +6,7 @@ import { message, Modal } from 'ant-design-vue';
 import Update from '../Stock/Update/index.vue';
 
 export default defineComponent({
+  name: 'StocksDetail',
   components: {
     Update
   },
@@ -96,6 +97,8 @@ export default defineComponent({
       await getLogInfo();
     });
 
+    
+
     // 删除的方法
     const removeStock = async () => {
       Modal.confirm({
@@ -122,7 +125,8 @@ export default defineComponent({
 
     // 返回列表
     const back = () => {
-      router.replace('/stocks');
+      // router.replace('/stocks');
+      router.back();
     }
 
 

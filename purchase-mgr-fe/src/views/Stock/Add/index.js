@@ -5,7 +5,8 @@ import { message } from 'ant-design-vue';
 
 const defaultFormData = {
   name: '',
-  count: 0
+  count: 0,
+  storeName: ''
 };
 
 export default defineComponent({
@@ -23,6 +24,7 @@ export default defineComponent({
 
         return;
       }
+      
 
       const form = clone(addForm);
 

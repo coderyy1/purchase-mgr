@@ -20,24 +20,27 @@
         <div class="info">
           <div class="item-row">
             <div class="item-col">
-              <div class="title">名称</div>
+              <div class="title">名称：</div>
               <div class="content">{{ s.name }}</div>
             </div>
             <div class="item-col">
-              <div class="title">库存</div>
+              <div class="title">库存：</div>
               <div class="content">{{ s.count }}</div>
             </div>
-            <div class="item-col"></div>
+            <div class="item-col">
+              <div class="title">仓库名称：&nbsp;&nbsp;&nbsp;</div>
+              <div class="content">{{ s.storeName }}</div>
+            </div>
           </div>
           <div class="item-row">
             <div class="item-col">
-              <div class="title">添加日期</div>
+              <div class="title">添加日期：&nbsp;&nbsp;&nbsp;</div>
               <div class="content">{{ formatTimestamp(createdAt) }}</div>
             </div>
           </div>
           <div class="item-row">
             <div class="item-col">
-              <div class="title">上次修改时间&nbsp;&nbsp;&nbsp;</div>
+              <div class="title">上次修改时间：&nbsp;&nbsp;&nbsp;</div>
               <div class="content">&nbsp;&nbsp;{{ formatTimestamp(updatedAt) }}</div>
             </div>
           </div>
@@ -50,7 +53,7 @@
     <!-- 出入库日志 -->
     <div class="log">
       <a-spin :spinning="bottomLoading">
-        <a-card class="hover-card" title="出入库日志">
+        <a-card :headStyle="{fontSize: '22px', fontWeight: '500'}" title="出入库日志">
           <!-- <space-between>
             <h3>出入库日志</h3>
             <div class="actions">
@@ -60,7 +63,7 @@
           </space-between>
           <a-divider /> -->
           <template #extra >
-            <span>
+            <span class="logFlagTitle">
               <a href="javascript:;" 
                 @click="toggleFlag('IN_COUNT')">
                 <span 
@@ -71,7 +74,7 @@
                 入库日志
               </a>
             </span>
-            <span style="margin-left: 12px;">
+            <span class="logFlagTitle" style="margin-left: 12px;">
               <a href="javascript:;" 
                 @click="toggleFlag('OUT_COUNT')">
                 <span 
@@ -82,7 +85,16 @@
                 出库日志
               </a>
             </span>
+              <!-- <a-select
+                v-model:value="logFlag"
+                style="width: 120px"
+                @change="toggleFlag"
+              >
+                <a-select-option value="IN_COUNT">入库日志</a-select-option>
+                <a-select-option value="OUT_COUNT">出库日志</a-select-option>
+              </a-select> -->
           </template>
+          {{logFlag}}
           <a-table 
             rowKey="_id" 
             :columns="column" 

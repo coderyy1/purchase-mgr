@@ -7,6 +7,7 @@ import { message, Modal, Input } from 'ant-design-vue';
 
 
 export default defineComponent({
+  name: 'Contrast',
   props: {
     simple: Boolean
   },
@@ -24,7 +25,7 @@ export default defineComponent({
         dataIndex: 'place',
       },
       {
-        title: '报价(每个/每斤)',
+        title: '报价',
         // dataIndex: 'price',
         sortDirections: ['descend'],
         sorter: (a, b) => a.price - b.price,

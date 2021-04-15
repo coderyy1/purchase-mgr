@@ -10,6 +10,7 @@ import { message, Modal, Input } from 'ant-design-vue';
 
 
 export default defineComponent({
+  name: 'SupplierList',
   props: {
     simple: Boolean
   },
@@ -149,7 +150,7 @@ export default defineComponent({
     // 跳转详情页面
     const goToDetail = (data) => {
       router.push({
-        path: `/suppliers/${data._id}`
+        path: `/suppliers/details/${data._id}`
       });
     }
 

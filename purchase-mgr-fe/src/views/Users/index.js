@@ -8,6 +8,7 @@ import store from '@/store';
 
 
 export default defineComponent({
+  name: 'User',
   components: {
     Add, EditOutlined
   },

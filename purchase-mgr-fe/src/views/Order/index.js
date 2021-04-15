@@ -8,6 +8,7 @@ import { message, Modal, Input } from 'ant-design-vue';
 
 
 export default defineComponent({
+  name: 'OrderList',
   props: {
     simple: Boolean
   },
@@ -171,7 +172,7 @@ export default defineComponent({
     // 跳转详情页面
     const goToDetail = (data) => {
       router.push({
-        path: `/orders/${data._id}`
+        path: `/orders/details/${data._id}`
       });
     }
 

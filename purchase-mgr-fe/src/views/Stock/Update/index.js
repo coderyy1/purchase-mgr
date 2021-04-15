@@ -11,7 +11,8 @@ export default defineComponent({
   },
   setup(props, context) {
     const updateForm = reactive({
-      name: ''
+      name: '',
+      storeName: ''
     });
 
     watch(() => props.info, (current) => {
@@ -29,7 +30,8 @@ export default defineComponent({
 
       const form = {
         id: updateForm._id,
-        name: updateForm.name
+        name: updateForm.name,
+        storeName: updateForm.storeName
       };
 
       // 发送请求

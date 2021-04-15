@@ -19,7 +19,13 @@
         <app-nav/>
       </div>
       <div class="right">
-        <router-view />
+        <!-- <router-view /> -->
+        <router-view v-slot="{ Component }">
+          <!-- 缓存页面 -->
+          <keep-alive :include="store.state.keepComps">
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </div>
     </div>
   </div>

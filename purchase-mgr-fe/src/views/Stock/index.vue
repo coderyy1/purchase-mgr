@@ -44,13 +44,19 @@
           :pagination="false"
           :scroll="{ x: 'max-content' }"
         >
+          <!-- 仓库信息 -->
+          <template #storeName="data">
+            {{ data.text.storeName || '无仓库信息' }}
+          </template>
+          <!-- 创建日期 -->
           <template #addDate="data">
             {{ formatTimestamp(data.text.meta.createdAt) }}
           </template>
+          <!-- 最后修改日期 -->
           <template #updateDate="data">
             {{ formatTimestamp(data.text.meta.updatedAt) }}
           </template>
-
+          <!-- 操作 -->
           <template #actions="data" v-if="!simple">
             <space-between>
               <a href="javascript:;" 

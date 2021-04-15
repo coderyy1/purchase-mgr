@@ -9,6 +9,7 @@ import { useStore } from 'vuex';
 
 
 export default defineComponent({
+  name: 'Stocks',
   props: {
     simple: Boolean
   },
@@ -27,6 +28,12 @@ export default defineComponent({
           customRender: 'count'
         },
         width: '180px'
+      },
+      {
+        title: '仓库',
+        slots: {
+          customRender: 'storeName'
+        }
       },
       {
         title: '添加日期',
@@ -196,7 +203,7 @@ export default defineComponent({
     // 跳转详情页面
     const gotoDetail = (data) => {
       router.push({
-        path: `/stocks/${data._id}`
+        path: `/stocks/details/${data._id}`
       });
     }
 
