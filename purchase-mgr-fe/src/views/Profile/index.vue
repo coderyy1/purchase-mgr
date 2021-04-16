@@ -1,6 +1,13 @@
 <template>
   <div>
     <a-card class="profile-card">
+      <!-- 信息 -->
+      <h1>{{`您好!    ${store.state.userInfo.character.title}：${store.state.userInfo.account}`}}</h1>
+      <a-divider />
+      <h2>修改头像</h2>
+      <a-divider />
+        <UploadImg />
+      <a-divider />
       <h2>修改密码</h2>
       <a-divider />
       <div class="input-wrapper">

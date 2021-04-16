@@ -15,10 +15,12 @@ export default defineComponent({
     const updateForm = reactive({
       name: '',
       supplier: '',
+      orderId: '',
       money: 0
     });
 
     watch(() => props.info, (current) => {
+      updateForm.orderId = ''
       Object.assign(updateForm, current);
       updateForm.supplier = updateForm.supplier._id;
     });
@@ -45,6 +47,7 @@ export default defineComponent({
       const form = {
         id: updateForm._id,
         supplier: updateForm.supplier,
+        orderId: updateForm.orderId,
         money: updateForm.money
       };
 

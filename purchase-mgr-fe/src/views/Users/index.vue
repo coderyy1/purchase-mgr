@@ -61,6 +61,7 @@
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="remove(data.text._id)"
+                v-if="data.text._id !== nowUserId"
               >
                 删除
               </a>

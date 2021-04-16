@@ -16,6 +16,7 @@ router.post('/add', async (ctx) => {
     num,
     supplier = '',
     user = '',
+    orderId = '' ,
     money
   } = ctx.request.body;
 
@@ -25,6 +26,7 @@ router.post('/add', async (ctx) => {
     supplier,
     user,
     money,
+    orderId,
     demandId: id
   });
 

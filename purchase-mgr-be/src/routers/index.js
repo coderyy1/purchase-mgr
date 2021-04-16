@@ -10,6 +10,7 @@ const character = require('./character/index');
 const user = require('./user/index');
 const profile = require('./profile/index');
 const home = require('./home/index');
+const upload = require('./upload/index');
 
 
 module.exports = (app) => {
@@ -25,4 +26,5 @@ module.exports = (app) => {
   app.use(user.routes());
   app.use(profile.routes());
   app.use(home.routes());
+  app.use(upload.routes());
 };

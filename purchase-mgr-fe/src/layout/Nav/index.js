@@ -63,10 +63,14 @@ export default defineComponent({
 
     const keys = ref([]);
 
+
+    const navWrap = ref()
+
     // 跳转方法
     const to = (url) => {
       router.push(url);
     }
+
 
     watch(() => route.path, (current) => {
       keys.value = [route.meta.navUrl];
@@ -91,7 +95,7 @@ export default defineComponent({
       openKeys,
       keys,
 
-      to
+      to,
     }
   }
 });

@@ -4,7 +4,8 @@ const { connect } = require('./db');
 const registerRoutes = require('./routers');
 const { middleware: koaJwtMiddleware, checkUser, catchTokenError } = require('./helpers/token');
 const cors = require('@koa/cors')
-
+const fs = require('fs');
+const path = require('path');
 
 
 const app = new Koa();
@@ -12,13 +13,20 @@ const app = new Koa();
 connect().then(() => {
   // 解决跨域
   app.use(cors());
-  app.use(koaBody());
+  app.use(koaBody({
+    multipart: true,
+    formidable: {
+      maxFileSize: 200 * 1024 * 1024
+    }
+  }));
   app.use(catchTokenError);
   // 检查jwt的中间件
   koaJwtMiddleware(app);
   app.use(checkUser);
   // 注册路由
   registerRoutes(app);
+
+
 
   app.listen(3000, () => {
     console.log('启动成功!,服务器运行在3000端口');

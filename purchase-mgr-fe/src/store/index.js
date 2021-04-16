@@ -13,6 +13,8 @@ export default createStore({
     userInfo: {},
     // 用户权限信息
     userCharacter: {},
+    // 用户头像
+    userAvatSrc: '',
     // 缓存组件
     keepComps: KEEPALIVECOMPS
   },
@@ -25,6 +27,9 @@ export default createStore({
     },
     setUserCharacter(state, userCharacter) {
       state.userCharacter = userCharacter;
+    },
+    setuserAvatSrc(state, userAvatSrc) {
+      state.userAvatSrc = userAvatSrc;
     },
     setKeepComp(state) {
       state.keepComps = KEEPALIVECOMPS
@@ -49,6 +54,14 @@ export default createStore({
         .success(({ data }) => {
           store.commit('setUserInfo', data);
           store.commit('setUserCharacter', getCharacterInfoById(data.character._id));
+        });
+    },
+    async getuserAvatSrc(store) {
+      const _id = store.state.userInfo._id
+      const res = await user.userAvat({_id})
+      result(res)
+        .success(({data}) => {
+          store.commit('setuserAvatSrc', data.avatSrc);
         });
     },
   },

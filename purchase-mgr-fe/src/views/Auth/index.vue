@@ -32,7 +32,9 @@
           </div>
 
           <div class="item">
-            <a-button type="primary" @click="login">登陆</a-button>
+            <a-spin :spinning="logLoading">
+              <a-button type="primary" @click="login">登陆</a-button>
+            </a-spin>
           </div>
         </a-tab-pane>
 
@@ -67,7 +69,9 @@
           </div>
 
           <div class="item">
-            <a-button type="primary" @click="register">注册</a-button>
+            <a-spin :spinning="regLoading">
+              <a-button type="primary" @click="register">注册</a-button>
+            </a-spin>
           </div>
         </a-tab-pane>
       </a-tabs>

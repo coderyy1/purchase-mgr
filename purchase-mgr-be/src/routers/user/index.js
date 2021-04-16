@@ -273,10 +273,49 @@ router.post('/update/character', async (ctx) => {
 
 // 通过token获取用户信息的接口----------------------------------------------------------------------
 router.get('/info', async (ctx) => {
+
+  // const { _id, account } = await verify(getToken(ctx))
+
+  // const user = await User.findOne({
+  //   _id,
+  //   account
+  // }).exec();
+
+  // const userInfo = {
+  //   account: user.account,
+  //   _id: user._id,
+  //   character: user.character,
+  //   avatSrc: user.avatSrc || 'http://localhost:5000/avatar/normal.png'
+  // }
+
+  // ctx.body = {
+  //   data: userInfo,
+  //   code: 1,
+  //   msg: '获取成功'
+  // }
+
   ctx.body = {
     data: await verify(getToken(ctx)),
     code: 1,
     msg: '获取成功'
+  }
+});
+
+// 获取用户头像的接口------------------------------------------------------
+
+router.get('/avatIcoSrc', async (ctx) => {
+  const { _id } = ctx.query;
+
+  const user = await User.findOne({
+    _id
+  }).exec();
+
+  ctx.body = {
+    code: 1,
+    msg: '获取成功',
+    data: {
+      avatSrc: user.avatSrc || 'http://localhost:5000/avatar/normal.png'
+    }
   }
 });
 

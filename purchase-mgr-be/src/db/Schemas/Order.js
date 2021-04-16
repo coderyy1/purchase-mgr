@@ -13,6 +13,7 @@ const OrderSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }, //操作者
+  orderId: String, //订单号
   money: Number, //支出
   demandId: String, //需求对应的id
 

@@ -51,6 +51,12 @@
           </div>
           <div class="item-row">
             <div class="item-col">
+              <div class="title">订单号</div>
+              <div class="content">{{ o.orderId || '暂无订单信息' }}</div>
+            </div>
+          </div>
+          <div class="item-row">
+            <div class="item-col">
               <div class="title">需求详情</div>
               <div class="content">
                 <a href="javascript:;" @click="goDemandDetail">

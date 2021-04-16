@@ -9,6 +9,7 @@ const defaultFormData = {
   num: 0,
   supplier: '',
   user: '',
+  orderId: '',
   money: 0,
 };
 
@@ -37,6 +38,7 @@ export default defineComponent({
       addForm.name = props.info.name;
       addForm.supplier = ''
       maxCount.value = props.info.num;
+      addForm.orderId = ''
       await getSupplierList()
     });
 
@@ -57,6 +59,11 @@ export default defineComponent({
       }
       if(addForm.supplier === '') {
         message.info('请选择供应商');
+
+        return;
+      }
+      if(addForm.orderId === '') {
+        message.info('请输入订单号');
 
         return;
       }

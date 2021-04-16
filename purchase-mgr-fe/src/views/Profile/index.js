@@ -4,9 +4,15 @@ import { message } from 'ant-design-vue';
 import { result } from '@/helpers/utils';
 import { setToken } from '@/helpers/token';
 import { useRouter } from 'vue-router';
+import store from '@/store'
+
+import UploadImg from '@/components/UploadImg/index.vue'
 
 export default defineComponent({
   name: 'Profile',
+  components: {
+    UploadImg
+  },
   setup() {
     const oldPwd = ref('');
     const newPwd = ref('');
@@ -67,6 +73,7 @@ export default defineComponent({
       newPwd,
       submiPwd,
       key,
+      store,
 
       updatePwd,
       logout

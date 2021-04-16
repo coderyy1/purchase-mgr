@@ -7,7 +7,12 @@
       </a>
       <div class="h-right">
         <div class="hello-msg" title="我的" @click="goProfile">
-          {{ `${store.state.userInfo.account},欢迎！` }}
+            <a-avatar 
+              size="large"
+              :src="avatSrc"
+            >
+            </a-avatar>
+          {{ `${store.state.userInfo.account}` }}
         </div>
         <div class="logout" @click="logout" title="登出">退出</div>
       </div>

@@ -41,3 +41,8 @@ export const updateCharacter = (character, userId) => {
 export const info = () => {
   return get('/user/info');
 };
+
+// 获取用户头像的请求
+export const userAvat = (data) => {
+  return get('/user/avatIcoSrc', data);
+};

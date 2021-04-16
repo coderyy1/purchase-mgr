@@ -3,6 +3,7 @@
     <a-menu
       id="dddddd"
       style="width: 100%"
+      theme="dark"
       v-model:selectedKeys="keys"
       mode="inline"
       v-for="item of menu"

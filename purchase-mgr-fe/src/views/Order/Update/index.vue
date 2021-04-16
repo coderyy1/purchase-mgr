@@ -29,6 +29,10 @@
             </a-select-option>
           </a-select>
         </a-form-item>
+        <a-form-item label="订单号">
+          <a-input v-model:value="updateForm.orderId" allowClear
+           />
+        </a-form-item>
         <a-form-item label="金额">
           <a-input-number v-model:value="updateForm.money" :min="0" :max="99999999" />
         </a-form-item>

@@ -33,7 +33,9 @@ const middleware = (app) => {
       /^\/auth\/register/,
       /^\/character\/list/,
       /^\/user\/reset\/password/,
-      /^\/upload\/file/
+      /^\/user\/avatIcoSrc/,
+      /^\/upload\/file/,
+      /^\/avatar/
     ]
   }));
 }
@@ -48,7 +50,8 @@ const res401 = (ctx) => {
 
 const checkUser = async (ctx, next) => {
   const { path } = ctx;
-  if (path === '/auth/login' || path === '/auth/register' || path === '/user/reset/password' || path === '/character/list') {
+  if (path === '/auth/login' || path === '/auth/register' || path === '/user/reset/password' || path === '/character/list' || 
+  path === '/avatar') {
     await next();
     return;
   }

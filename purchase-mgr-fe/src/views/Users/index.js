@@ -54,6 +54,8 @@ export default defineComponent({
 
     const loading = ref(true);
 
+    const nowUserId = store.state.userInfo._id
+
     const editForm = reactive({
       character: '',
       current: {}
@@ -165,6 +167,7 @@ export default defineComponent({
       editForm,
       loading,
       characterInfo: store.state.characterInfo,
+      nowUserId,
 
 
       updateCharacter, 

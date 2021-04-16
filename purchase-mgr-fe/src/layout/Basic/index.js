@@ -1,18 +1,27 @@
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import Nav from '../Nav/index.vue';
 import { setToken } from '@/helpers/token';
 import { useStore } from 'vuex';
 import { Modal, message } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
+import { UserOutlined } from '@ant-design/icons-vue'
+import { result } from '@/helpers/utils';
 
 export default defineComponent({
   components: {
-    AppNav: Nav
+    AppNav: Nav, UserOutlined
   },
   setup() {
     const store = useStore();
     const router = useRouter();
 
+    const avatSrc = computed(() => {
+      return store.state.userAvatSrc
+    })
+
+
+
+    //登出
     const logout = () => {
       Modal.confirm({
         title: '确认要登出吗?',
@@ -26,6 +35,7 @@ export default defineComponent({
       });
     }
 
+
     const goHome = () => {
       router.replace('/demands');
     }
@@ -35,8 +45,11 @@ export default defineComponent({
     }
 
 
+
     return {
       store,
+      avatSrc,
+
       logout,
       goHome,
       goProfile

@@ -232,6 +232,13 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
+  // 获取用户头像
+  if(from.path !== '/auth' && !store.state.userAvatSrc) {
+
+    await store.dispatch('getuserAvatSrc')
+
+  }
+
   if(to.path === '/users' || to.path === '/invite') {
     if(store.state.userCharacter.name !== 'admin') {
       next('/home');

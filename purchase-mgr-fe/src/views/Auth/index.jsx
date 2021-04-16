@@ -25,6 +25,10 @@ export default defineComponent({
       key: ''
     });
 
+    const regLoading = ref(false)
+
+    const logLoading = ref(false)
+
     const router = useRouter();
 
     // 登陆的表单
@@ -70,21 +74,26 @@ export default defineComponent({
         return;
       }
 
+      regLoading.value = true
+
       const res = await auth.register(regForm.account, regForm.password, regForm.inviteCode, regForm.key);
 
       result(res)
         .success((data) => {
           message.success(data.msg);
-          // 重置注册表单
-          // regForm.account = '';
-          // regForm.password = '';
-          // regForm.subPwd = '';
-          // regForm.inviteCode = '';
+          
           // 注册成功自动跳转登录界面
           logForm.account = regForm.account;
           logForm.password = regForm.password;
           currentTab.value = '1';
+
+          // 重置注册表单
+          regForm.account = '';
+          regForm.password = '';
+          regForm.subPwd = '';
+          regForm.inviteCode = '';
         });
+      regLoading.value = false
     }
 
     // 登录的逻辑
@@ -101,22 +110,36 @@ export default defineComponent({
         return;
       }
 
+      logLoading.value = true
+      message.info({
+        content: 'Loading...',
+        key: 'logLoad',
+      })
+
       const res = await auth.login(logForm.account, logForm.password);
 
       result(res)
         .success((data) => {
-          message.success(`' ${data.data.user.account} '  ${data.msg}`);
+          message.success({
+            content: `' ${data.data.user.account} '  ${data.msg}`,
+            key: 'logLoad',
+          });
           // 存储用户信息 -> vuex
           store.commit('setUserInfo', data.data.user);
           store.commit('setUserCharacter', getCharacterInfoById(data.data.user.character._id));
+          
           // 存储token -> sessionStorage
           setToken(data.data.token);
 
           // 更新axios请求头内容
           axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
 
+          store.dispatch('getuserAvatSrc')
+
           router.replace('/home')
         });
+      
+      logLoading.value = false
     }
 
     // 忘记密码的方法
@@ -153,6 +176,8 @@ export default defineComponent({
       regForm,
       logForm,
       currentTab,
+      logLoading,
+      regLoading,
       register,
       login,
       resetPwd

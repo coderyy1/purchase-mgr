@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Character'
   },
-  key: String,  //密钥 -> 用于修改密码
+  key: String,  //密钥 -> 用于修改密码\
+  avatSrc: String, //用户头像
 
   meta: getMeta()
 });

@@ -63,7 +63,7 @@
           </space-between>
           <a-divider /> -->
           <template #extra >
-            <span class="logFlagTitle">
+            <!-- <span class="logFlagTitle">
               <a href="javascript:;" 
                 @click="toggleFlag('IN_COUNT')">
                 <span 
@@ -84,17 +84,16 @@
                 </span>
                 出库日志
               </a>
-            </span>
-              <!-- <a-select
+            </span> -->
+              <a-select
                 v-model:value="logFlag"
                 style="width: 120px"
                 @change="toggleFlag"
               >
                 <a-select-option value="IN_COUNT">入库日志</a-select-option>
                 <a-select-option value="OUT_COUNT">出库日志</a-select-option>
-              </a-select> -->
+              </a-select>
           </template>
-          {{logFlag}}
           <a-table 
             rowKey="_id" 
             :columns="column" 
