@@ -10,7 +10,7 @@ export default defineComponent({
   setup() {
     const column = [
       {
-        title: '邀请码',
+        title: '注册码',
         dataIndex: 'code',
       },
       {

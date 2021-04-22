@@ -42,9 +42,11 @@
           <template #character="data">
             <a href="javascript:;"
               @click="onEdit(data.text)"
+              v-if="data.text.character.title !== '管理员'"
             >
               <EditOutlined />
             </a>
+            <EditOutlined v-else/>
             {{ data.text.character.title }}
           </template>
           <template #createdAt="data">
@@ -55,9 +57,17 @@
               <a href="javascript:;"
                 class="btn btn-warning btn-sm"
                 @click="resetPwd(data.text._id)"
+                v-if="data.text.character.title !== '管理员'"
               >
                 重置密码
               </a>
+              <button href="javascript:;"
+                class="btn btn-warning btn-sm"
+                disabled="disabled"
+                v-else
+              >
+                重置密码
+              </button>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="remove(data.text._id)"

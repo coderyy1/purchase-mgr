@@ -132,6 +132,7 @@
         <space-between v-if="!simple" class="pagi">
           <div></div>
           <a-pagination 
+            show-quick-jumper
             v-model:current="currentPage"
             :total="total"
             :page-size="5"

@@ -44,7 +44,7 @@ export default defineComponent({
         onlyAdmin: true
       },
       {
-        title: '邀请码管理',
+        title: '注册码管理',
         url: '/invite',
         onlyAdmin: true
       },
