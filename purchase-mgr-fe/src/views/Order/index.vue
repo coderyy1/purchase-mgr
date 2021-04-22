@@ -36,7 +36,6 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
         >
           <!-- 供应商 -->
           <template #supplier="data">
@@ -62,14 +61,14 @@
               <a href="javascript:;" 
                 class="btn btn-warning btn-sm"
                 @click="updateOrder(data.text)"
-                v-over-buyer
+                v-buyer-self="data.text.user.account"
               >
                 修改
               </a>
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="removeOrder(data.text)"
-                v-over-buyer
+                v-buyer-self="data.text.user.account"
               >
                 删除
               </a>

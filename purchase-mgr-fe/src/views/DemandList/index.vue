@@ -58,7 +58,7 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
+          
         >
           <!-- 状态 -->
           <template #state="data">

@@ -65,7 +65,6 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
         >
           <template #price="data" >
             {{ `${data.text.price}  ￥  /  ` + (data.text.unit || '个') }}

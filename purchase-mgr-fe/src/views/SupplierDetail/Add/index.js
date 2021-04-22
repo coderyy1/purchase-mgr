@@ -1,7 +1,8 @@
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { goods } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import options from '@/helpers/cities.js'
 
 const defaultFormData = {
   name: '',
@@ -17,6 +18,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const addForm = reactive(clone(defaultFormData));
+    const cascaderValue = ref([])
 
     const submit = async () => {
 
@@ -31,7 +33,7 @@ export default defineComponent({
 
         return;
       }
-      if(addForm.place === '') {
+      if(cascaderValue.value.length === 0) {
         message.info('请输入商品产地');
 
         return;
@@ -39,6 +41,7 @@ export default defineComponent({
 
       const form = clone(addForm);
       form.id = props.id;
+      form.place = cascaderValue.value.join('')
 
       // 发送请求
       const res = await goods.add(form);
@@ -49,6 +52,7 @@ export default defineComponent({
       .success((data) => {
         // 重置表单
         Object.assign(addForm, defaultFormData);
+        cascaderValue.value = []
         // 提示成功
         message.success(data.msg);
         // 更新list
@@ -67,7 +71,9 @@ export default defineComponent({
       addForm,
       submit,
       props,
-      close
+      close,
+      options,
+      cascaderValue
     }
   }
 });

@@ -27,7 +27,7 @@ router.post('/add', async (ctx) => {
   if(one) {
     ctx.body = {
       code: 0,
-      msg: '已存在该商品'
+      msg: '已存在该货物'
     };
 
     return;

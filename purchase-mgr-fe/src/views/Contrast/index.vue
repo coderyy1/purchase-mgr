@@ -36,7 +36,7 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
+          
           @change="toggleSort"
         >
         <!-- 报价 -->

@@ -61,10 +61,18 @@
               <a href="javascript:;"
                 class="btn btn-danger btn-sm"
                 @click="remove(data.text._id)"
-                v-if="data.text._id !== nowUserId"
+                v-if="data.text.character.title !== '管理员'"
+                
               >
                 删除
               </a>
+              <button href="javascript:;"
+                class="btn btn-danger btn-sm"
+                v-else
+                disabled="disabled"
+              >
+                删除
+              </button>
             </div>
           </template>
         </a-table>

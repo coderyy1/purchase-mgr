@@ -1,4 +1,5 @@
 import { isAdmin, overBuyer, overStoreman } from '../character';
+import store from '@/store'
 
 export const regDirectives = (app) => {
   app.directive('only-admin', {
@@ -35,6 +36,26 @@ export const storemanDirectives = (app) => {
         // el.style.display = 'none';
         el.parentNode && el.parentNode.removeChild(el);
       }
+    }
+  });
+}
+
+// 采购人员能修改自己提交的
+export const buyerSelfDirectives = (app) => {
+  app.directive('buyer-self', {
+    mounted(el, { value }) {
+      const chara = store.state.userInfo.character.title
+      const account = store.state.userInfo.account
+      if(chara === '管理员') {
+        return
+      }
+      if(chara === '采购人员' && account === value) {
+        return
+      }
+
+
+        // el.style.display = 'none';
+      el.parentNode && el.parentNode.removeChild(el);
     }
   });
 }

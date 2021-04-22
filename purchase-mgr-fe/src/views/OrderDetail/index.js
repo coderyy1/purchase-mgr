@@ -4,6 +4,7 @@ import { order, supplier } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal } from 'ant-design-vue';
 import Update from '../Order/Update/index.vue';
+import store from '@/store'
 
 export default defineComponent({
   name: 'OrderDetail',
@@ -99,6 +100,7 @@ export default defineComponent({
       userName,
       showUpdate,
       topLoading,
+      store,
       
       removeOrder,
       getData,

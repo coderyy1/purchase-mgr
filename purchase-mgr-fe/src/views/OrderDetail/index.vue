@@ -5,7 +5,9 @@
       <a-card class="hover-card wrapper">
         <space-between>
           <h2>订单详情</h2>
-          <div class="actions" v-over-buyer>
+          <div class="actions" 
+            v-buyer-self="store.state.fromAccount"
+          >
             <a-button type="primary"
             @click="showUpdate = true">
               编辑

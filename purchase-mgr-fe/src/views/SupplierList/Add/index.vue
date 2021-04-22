@@ -23,7 +23,9 @@
           <a-input v-model:value="addForm.contacts" allowClear/>
         </a-form-item>
         <a-form-item label="地址">
-          <a-input v-model:value="addForm.address" allowClear/>
+          <!-- <a-input v-model:value="addForm.address" allowClear/> -->
+          <a-cascader v-model:value="cascaderValue" :options="options" placeholder="请选择地址" 
+          />
         </a-form-item>
       </a-form>
     </a-modal>

@@ -1,7 +1,8 @@
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { supplier } from '@/network/index';
 import { result, clone } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import options from '@/helpers/cities.js'
 
 const defaultFormData = {
   name: '',
@@ -16,7 +17,10 @@ export default defineComponent({
     isShow: Boolean
   },
   setup(props, context) {
+
+
     const addForm = reactive(clone(defaultFormData));
+    const cascaderValue = ref([])
 
     // 邮箱正则
     const reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
@@ -44,7 +48,7 @@ export default defineComponent({
 
         return;
       }
-      if(addForm.address === '') {
+      if(cascaderValue.value.length === 0) {
         message.info('请输入地址');
 
         return;
@@ -56,6 +60,7 @@ export default defineComponent({
       }
 
       const form = clone(addForm);
+      form.address = cascaderValue.value.join('')
 
       // 发送请求
       const res = await supplier.add(form);
@@ -66,6 +71,7 @@ export default defineComponent({
       .success((data) => {
         // 重置表单
         Object.assign(addForm, defaultFormData);
+        cascaderValue.value = []
         // 提示成功
         message.success(data.msg);
         // 更新list
@@ -84,7 +90,9 @@ export default defineComponent({
       addForm,
       submit,
       props,
-      close
+      close,
+      options,
+      cascaderValue
     }
   }
 });

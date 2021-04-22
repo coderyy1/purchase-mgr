@@ -72,7 +72,6 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
         >
           <!-- 供应商 -->
           <template #supplier="data">

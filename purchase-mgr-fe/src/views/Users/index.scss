@@ -12,9 +12,10 @@
 
 .tb-actions {
   a {
-    &:last-of-type {
-      margin-left: 12px;
-    }
+    margin-left: 12px;
+  }
+  button {
+    margin-left: 12px;
   }
 }
 

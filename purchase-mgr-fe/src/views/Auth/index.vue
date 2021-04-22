@@ -30,7 +30,6 @@
               @click="resetPwd"
             >忘记密码</a>
           </div>
-
           <div class="item">
             <a-spin :spinning="logLoading">
               <a-button type="primary" @click="login">登陆</a-button>

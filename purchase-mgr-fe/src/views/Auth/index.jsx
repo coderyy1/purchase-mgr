@@ -10,6 +10,8 @@ import { getCharacterInfoById } from '@/helpers/character';
 import axios from 'axios';
 
 
+
+
 export default defineComponent({
   name: 'Auth',
   components: {

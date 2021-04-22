@@ -16,7 +16,9 @@ export default createStore({
     // 用户头像
     userAvatSrc: '',
     // 缓存组件
-    keepComps: KEEPALIVECOMPS
+    keepComps: KEEPALIVECOMPS,
+    // 过来的界面点击时的account
+    fromAccount: ''
   },
   mutations: {
     setCharacterInfo(state, characterInfo) {
@@ -36,6 +38,9 @@ export default createStore({
     },
     clearKeepComp(state) {
       state.keepComps = []
+    },
+    setFromAccount(state, fromAccount) {
+      state.fromAccount = fromAccount;
     }
   },
   actions: {

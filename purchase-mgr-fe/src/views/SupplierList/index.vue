@@ -42,7 +42,6 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
         >
           <!-- 操作 -->
           <template #actions="data" v-if="!simple">

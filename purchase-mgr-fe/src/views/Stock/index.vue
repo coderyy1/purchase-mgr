@@ -42,7 +42,6 @@
           :data-source="list" 
           bordered
           :pagination="false"
-          :scroll="{ x: 'max-content' }"
         >
           <!-- 仓库信息 -->
           <template #storeName="data">

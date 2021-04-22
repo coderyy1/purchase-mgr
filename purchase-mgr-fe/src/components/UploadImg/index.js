@@ -39,6 +39,12 @@ export default defineComponent({
         return
       }
       const file = inputEl.value.files[0]
+      const ext = inputEl.value.files[0].type.split('/').pop()
+      if(ext !== 'gif' && ext !== 'jpeg' 
+        && ext !== 'jpg' && ext !== 'png') {
+          message.error('请选择图片文件')
+          return
+        }
       let form = new FormData()
       form.append('file', file)
       form.append('userId', userId)

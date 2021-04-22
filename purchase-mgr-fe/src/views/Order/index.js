@@ -4,6 +4,7 @@ import Update from './Update/index.vue';
 import { supplier, order } from '@/network';
 import { result, formatTimestamp, formatTimestamp2 } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
+import store from '@/store'
 
 
 
@@ -171,6 +172,7 @@ export default defineComponent({
 
     // 跳转详情页面
     const goToDetail = (data) => {
+      store.commit('setFromAccount', data.user.account)
       router.push({
         path: `/orders/details/${data._id}`
       });
@@ -190,6 +192,7 @@ export default defineComponent({
       loading,
       simple: props.simple,
       supplierInfo,
+      store,
 
 
 

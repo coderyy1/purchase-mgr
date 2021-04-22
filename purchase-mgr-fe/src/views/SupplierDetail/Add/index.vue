@@ -20,7 +20,9 @@
           <a-input v-model:value="addForm.unit" allowClear/>
         </a-form-item>
         <a-form-item label="产地">
-          <a-input v-model:value="addForm.place" allowClear/>
+          <!-- <a-input v-model:value="addForm.place" allowClear/> -->
+          <a-cascader v-model:value="cascaderValue" :options="options" placeholder="请选择产地" 
+          />
         </a-form-item>
       </a-form>
     </a-modal>
