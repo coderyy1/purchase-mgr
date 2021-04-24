@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router';
 import { setToken, getToken } from '@/helpers/token/index';
 import { getCharacterInfoById } from '@/helpers/character';
 import axios from 'axios';
+import Slider from '../../components/Slider/index.vue'
 
 
 
@@ -15,7 +16,7 @@ import axios from 'axios';
 export default defineComponent({
   name: 'Auth',
   components: {
-    UserOutlined, DisconnectOutlined, LockOutlined
+    UserOutlined, DisconnectOutlined, LockOutlined, Slider
   },
   setup() {
     // 注册的表单
@@ -30,6 +31,8 @@ export default defineComponent({
     const regLoading = ref(false)
 
     const logLoading = ref(false)
+
+    const logBtnIsOk = ref(true)
 
     const router = useRouter();
 
@@ -112,6 +115,16 @@ export default defineComponent({
         return;
       }
 
+      if(logForm.password.length < 6 || logForm.password.length > 12) {
+        message.error('密码长度为6~12位');
+        return;
+      }
+
+      if(logBtnIsOk.value === true) {
+        message.info('请完成验证')
+        return;
+      }
+
       logLoading.value = true
       message.info({
         content: 'Loading...',
@@ -142,6 +155,11 @@ export default defineComponent({
         });
       
       logLoading.value = false
+    }
+
+    // slider成功的回调
+    const sliderSucc = () => {
+      logBtnIsOk.value = false
     }
 
     // 忘记密码的方法
@@ -180,9 +198,12 @@ export default defineComponent({
       currentTab,
       logLoading,
       regLoading,
+      logBtnIsOk,
+
       register,
       login,
-      resetPwd
+      resetPwd,
+      sliderSucc
     }
   }
 });

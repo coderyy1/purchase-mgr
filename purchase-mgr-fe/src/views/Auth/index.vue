@@ -24,6 +24,9 @@
           <div class="item">
             <a-input-password size="large"  placeholder="密码" v-model:value="logForm.password" @keyup.enter.native="login" />
           </div>
+          <div class="item">
+            <Slider :successFun="sliderSucc"/>
+          </div>
 
           <div class="item">
             <a href="javascript:;" 
@@ -32,7 +35,7 @@
           </div>
           <div class="item">
             <a-spin :spinning="logLoading">
-              <a-button type="primary" @click="login">登陆</a-button>
+              <a-button :disabled="logBtnIsOk" type="primary" @click="login">{{logBtnIsOk ? '请完成验证' : '登陆'}}</a-button>
             </a-spin>
           </div>
         </a-tab-pane>
@@ -60,7 +63,7 @@
           </div>
 
           <div class="item">
-            <a-input placeholder="邀请码" size="large" allow-clear v-model:value="regForm.inviteCode">
+            <a-input placeholder="注册码" size="large" allow-clear v-model:value="regForm.inviteCode">
               <template v-slot:prefix>
                 <DisconnectOutlined />
               </template>
