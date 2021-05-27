@@ -20,6 +20,9 @@ export default {
     background-color: #fafafa !important;
     min-width: 1200px;
   }
+  html {
+    &::-webkit-scrollbar { width: 0 !important }
+  }
 
 
 
