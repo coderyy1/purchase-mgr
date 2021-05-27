@@ -23,10 +23,4 @@ export default {
   html {
     &::-webkit-scrollbar { width: 0 !important }
   }
-
-
-
-    
-
-
 </style>

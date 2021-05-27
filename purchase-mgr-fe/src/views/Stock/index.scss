@@ -26,3 +26,21 @@
 
 
 }
+.tag-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 20px;
+  padding-bottom: 12px;
+  .tag-el {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  a {
+    font-size: 16px;
+  }
+}

@@ -82,9 +82,13 @@
 
           <template #count="data">
             <space-between>
-              <a href="javascript:;" @click="editCount('OUT_COUNT', data.text)" v-over-storeman>出库</a>
-              {{ data.text.count }}
-              <a href="javascript:;" @click="editCount('IN_COUNT', data.text)" v-over-storeman>入库</a>
+              <div class="tag-wrapper">
+                <a href="javascript:;" @click="editCount('OUT_COUNT', data.text)" v-over-storeman>出库</a>
+                <div class="tag-text">{{ data.text.count }}</div>
+                <a-tag class="tag-el" v-if="data.text.count >= 100" color="success">库存充足</a-tag>
+                <a-tag class="tag-el" v-else color="error">库存不足</a-tag>
+                <a href="javascript:;" @click="editCount('IN_COUNT', data.text)" v-over-storeman>入库</a>
+              </div>
             </space-between>
           </template>
         </a-table>
